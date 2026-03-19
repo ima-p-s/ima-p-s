@@ -3,50 +3,673 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Detail | Ima P S</title>
+    <title>Fabric Construction | Ima P S</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-bright:   #6aA318;
+            --green-lime:     #AACC00;
+            --green-mid:      #3E6B23;
+            --yellow:         #E8B800;
+            --green-deep:     #1A2E0A;
+            --red:            #D0002E;
+            --blush:          #F5A898;
+            --blush-light:    #F5D0C5;
+            --blush-pale:     #FFF5F0;
+            --white:          #ffffff;
+            --off-white:      #faf9f6;
+            --border:         #ece9e3;
+            --dark:           #1a1a18;
+            --mid:            #787874;
+            --font-display: 'Playfair Display', serif;
+            --font-body:    'DM Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--white);
+            color: var(--dark);
+            font-family: var(--font-body);
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 3rem;
+            background: transparent;
+            transition: background 0.4s, border-color 0.4s;
+            border-bottom: 1px solid transparent;
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom-color: var(--border);
+        }
+        .logo a {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.4s;
+        }
+        nav.scrolled .logo a { color: var(--dark); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav.scrolled .nav-links a { color: var(--mid); }
+        .nav-links a:hover { color: var(--white); }
+        nav.scrolled .nav-links a:hover { color: var(--dark); }
+
+        /* ── HERO — fullscreen group shot ── */
+        .project-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--dark);
+        }
+
+        .hero-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scale(1.05);
+            animation: subtleZoom 8s ease forwards;
+        }
+
+        /* Gradient overlay so text is readable */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(20,20,18,0.75) 0%,
+                rgba(20,20,18,0.2) 50%,
+                rgba(20,20,18,0.1) 100%
+            );
+        }
+
+        /* Placeholder when no image yet */
+        .hero-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            color: #444;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            background: #111;
+        }
+        .hero-placeholder .placeholder-icon {
+            width: 60px; height: 60px;
+            border: 1px dashed #333;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Text sits at bottom left over the image */
+        .hero-content {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 4rem 4rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease 0.5s forwards;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--blush-light);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 6vw, 7rem);
+            font-weight: 400;
+            line-height: 0.95;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--blush);
+            display: block;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.6rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+        .hero-meta-item {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.65rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.2s forwards;
+        }
+        .scroll-line {
+            width: 1px; height: 40px;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255,255,255,0.6);
+            animation: scrollDrop 1.8s ease-in-out 1.5s infinite;
+        }
+
+        /* ── COLOUR STRIP ── */
+        .palette-strip { display: flex; height: 6px; }
+        .palette-strip span { flex: 1; }
+
+        /* ── SHARED ── */
+        .section-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--green-mid);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .section-tag::before {
+            content: '';
+            display: block;
+            width: 20px; height: 1px;
+            background: var(--green-mid);
+        }
+        .section-tag.red { color: var(--red); }
+        .section-tag.red::before { background: var(--red); }
+        .section-tag.yellow { color: var(--green-bright); }
+        .section-tag.yellow::before { background: var(--green-bright); }
+
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            color: var(--dark);
+        }
+        .section-heading em         { font-style: italic; color: var(--red); }
+        .section-heading em.green   { color: var(--green-mid); }
+        .section-heading em.lime    { color: var(--green-bright); }
+
+        .body-text {
+            font-size: 0.92rem;
+            line-height: 1.9;
+            color: var(--mid);
+            font-weight: 300;
+            margin-top: 1.2rem;
+        }
+
+        /* ── BRIEF ── */
+        .brief-section {
+            padding: 6rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 6rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .brief-quote {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--dark);
+            border-left: 2px solid var(--red);
+            padding-left: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ── INSPIRATION ── */
+        .inspiration-section {
+            padding: 6rem 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .inspiration-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+            align-items: start;
+        }
+        .plant-photo img { width: 100%; display: block; }
+        .plant-caption {
+            margin-top: 0.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+        .swatches-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 1.5rem;
+        }
+        .swatch-row { display: flex; flex-direction: column; gap: 0.75rem; }
+        .swatch { display: flex; align-items: center; gap: 1rem; }
+        .swatch-block {
+            width: 48px; height: 48px;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .swatch-name { font-size: 0.82rem; color: var(--dark); font-weight: 400; }
+        .swatch-desc { font-size: 0.7rem; color: var(--mid); margin-top: 0.1rem; }
+        .swatch-placeholder {
+            margin-top: 2rem;
+            width: 100%; aspect-ratio: 4/2;
+            background: var(--off-white);
+            border: 1px dashed var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--mid);
+        }
+
+        /* ── MAIN SAMPLES ── */
+        .samples-section {
+            padding: 6rem 4rem;
+            background: #f4f9ec;
+            border-bottom: 1px solid var(--border);
+        }
+        .samples-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+        .sample-card { overflow: hidden; }
+        .sample-img {
+            width: 100%; aspect-ratio: 3/4;
+            object-fit: cover; display: block;
+            transition: transform 0.6s ease;
+        }
+        .sample-card.hero-sample .sample-img { aspect-ratio: 2/3; }
+        .sample-card:hover .sample-img { transform: scale(1.03); }
+        .sample-placeholder {
+            width: 100%; aspect-ratio: 3/4;
+            background: #e6f0d6;
+            border: 1px dashed #b8d48a;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--green-mid);
+        }
+        .sample-card.hero-sample .sample-placeholder { aspect-ratio: 2/3; }
+        .sample-label {
+            margin-top: 0.8rem;
+            font-size: 0.68rem; letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green-mid); font-weight: 500;
+        }
+        .sample-technique { font-size: 0.8rem; color: var(--mid); margin-top: 0.2rem; }
+
+        /* ── COORDINATES ── */
+        .coordinates-section {
+            padding: 6rem 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .coord-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: end;
+            margin-bottom: 4rem;
+        }
+        .coord-grid { columns: 4; column-gap: 1rem; }
+        .coord-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .coord-item img { width: 100%; display: block; transition: transform 0.5s ease; }
+        .coord-item:hover img { transform: scale(1.04); }
+        .coord-placeholder {
+            width: 100%;
+            background: var(--blush-pale);
+            border: 1px dashed var(--blush-light);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--blush);
+        }
+        .coord-item:nth-child(1)  .coord-placeholder { aspect-ratio: 3/4; }
+        .coord-item:nth-child(2)  .coord-placeholder { aspect-ratio: 1/1; }
+        .coord-item:nth-child(3)  .coord-placeholder { aspect-ratio: 4/5; }
+        .coord-item:nth-child(4)  .coord-placeholder { aspect-ratio: 3/4; }
+        .coord-item:nth-child(5)  .coord-placeholder { aspect-ratio: 2/3; }
+        .coord-item:nth-child(6)  .coord-placeholder { aspect-ratio: 1/1; }
+        .coord-item:nth-child(7)  .coord-placeholder { aspect-ratio: 4/3; }
+        .coord-item:nth-child(8)  .coord-placeholder { aspect-ratio: 3/4; }
+        .coord-item:nth-child(9)  .coord-placeholder { aspect-ratio: 1/1; }
+        .coord-item:nth-child(10) .coord-placeholder { aspect-ratio: 2/3; }
+
+        /* ── NEXT PROJECT ── */
+        .next-project {
+            padding: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .next-label {
+            font-size: 0.65rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--mid);
+            margin-bottom: 0.5rem;
+        }
+        .next-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem; font-weight: 400;
+            color: var(--dark); text-decoration: none;
+            transition: color 0.3s;
+        }
+        .next-title:hover { color: var(--red); }
+        .view-all {
+            font-size: 0.75rem; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .view-all:hover { color: var(--dark); border-color: var(--dark); }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes subtleZoom { to { transform: scale(1); } }
+        @keyframes scrollDrop {
+            0% { top: -100%; }
+            50%, 100% { top: 100%; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            nav { padding: 1.2rem 1.5rem; }
+            .hero-content { padding: 2rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+            .hero-meta { align-items: flex-start; }
+            .brief-section { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 2rem; }
+            .inspiration-section, .samples-section,
+            .coordinates-section { padding: 4rem 2rem; }
+            .inspiration-grid { grid-template-columns: 1fr; }
+            .samples-grid { grid-template-columns: 1fr; }
+            .coord-grid { columns: 2; }
+            .coord-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+            .next-project { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 3rem 2rem; }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">
-        <a href="index.html">Ima P S</a>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <div class="logo"><a href="index.html">Ima P S</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">About</a>
+            <a href="connect.html">Connect</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO — fullscreen group shot -->
+    <div class="project-hero">
+        <!-- Replace with your group photo -->
+        <img class="hero-img"
+             src="images/fabric-group.jpg"
+             alt="Aglaonema Lipstick — All Samples"
+             onerror="this.style.display='none';">
+
+        <!-- Shows when no image is added yet -->
+        <div class="hero-placeholder">
+            <div class="placeholder-icon">⬜</div>
+            Add your group photograph here — this will be the hero
+        </div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-eyebrow">Fabric Construction · NID AP · 2025</p>
+                <h1 class="hero-title">
+                    Aglaonema<br>
+                    <em>Lipstick</em>
+                </h1>
+            </div>
+            <div class="hero-meta">
+                <span class="hero-meta-item">Dyeing</span>
+                <span class="hero-meta-item">Stitching</span>
+                <span class="hero-meta-item">Pintucks</span>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+            Scroll
+        </div>
     </div>
 
-    <div class="nav-links">
-        <a href="index.html" class="nav-item">Home</a>
-        <a href="work.html" class="nav-item">Work</a>
-        <a href="about.html" class="nav-item">About</a>
-        <a href="connect.html" class="nav-item">Connect</a>
+    <!-- COLOUR STRIP -->
+    <div class="palette-strip">
+        <span style="background:#6aA318;"></span>
+        <span style="background:#AACC00;"></span>
+        <span style="background:#3E6B23;"></span>
+        <span style="background:#E8B800;"></span>
+        <span style="background:#1A2E0A;"></span>
+        <span style="background:#D0002E;"></span>
+        <span style="background:#F5A898;"></span>
+        <span style="background:#F5D0C5;"></span>
+        <span style="background:#FFF5F0;"></span>
     </div>
-</nav>
-    <main class="project-detail-container">
-        <header class="project-header">
-            <a href="work.html" class="back-link">← Back to Gallery</a>
-            <h1>Fabric Consttruction</h1>
-            <p class="project-subtitle">Fabric Construction | 4th Semester | NID AP</p>
-        </header>
 
-        <section class="project-content">
-            <div class="large-image">
-                <img src="images/tussar-large-1.jpg" alt="Process">
-            </div>
-            
-            <div class="project-description">
-                <p>Describe your process here. Talk about the, the inspiration, and the inspiration behind the print.</p>
-            </div>
+    <!-- 2. BRIEF -->
+    <div class="brief-section">
+        <div class="reveal">
+            <div class="section-tag">The Brief</div>
+            <h2 class="section-heading">What takes<br>you <em>back?</em></h2>
+        </div>
+        <div class="reveal reveal-delay-1">
+            <blockquote class="brief-quote">
+                "List the things that make you feel nostalgic — that carry you back to childhood."
+            </blockquote>
+            <p class="body-text">
+                From that list, I chose the Aglaonema Lipstick — a houseplant I grew up seeing. Its deep crimson leaves veined with olive green felt familiar, tactile, alive. The brief became a translation of that sensory memory into fabric.
+                <!-- Replace with your own words -->
+            </p>
+        </div>
+    </div>
 
-            <div class="image-grid">
-                <img src="images/tussar-detail-1.jpg" alt="Detail 1">
-                <img src="images/tussar-detail-2.jpg" alt="Detail 2">
+    <!-- 3. INSPIRATION -->
+    <div class="inspiration-section">
+        <div class="section-tag reveal">Inspiration</div>
+        <h2 class="section-heading reveal reveal-delay-1">The plant that <em class="green">started it all</em></h2>
+        <div class="inspiration-grid">
+            <div class="plant-photo reveal reveal-delay-1">
+                <img src="images/Fabric construction 00.jpg" alt="Aglaonema Lipstick">
+                <p class="plant-caption">Aglaonema Lipstick — the source</p>
             </div>
-        </section>
+            <div class="reveal reveal-delay-2">
+                <p class="swatches-label">Colour Story</p>
+                <div class="swatch-row">
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#6aA318;"></div>
+                        <div><div class="swatch-name">Bright Green</div><div class="swatch-desc">Leaf surface, upper mid</div></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#AACC00;"></div>
+                        <div><div class="swatch-name">Lime</div><div class="swatch-desc">Young leaves, highlights</div></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#3E6B23;"></div>
+                        <div><div class="swatch-name">Forest Green</div><div class="swatch-desc">Leaf shadow & depth</div></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#E8B800;"></div>
+                        <div><div class="swatch-name">Yellow Gold</div><div class="swatch-desc">Veining & rib</div></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#1A2E0A;"></div>
+                        <div><div class="swatch-name">Deep Forest</div><div class="swatch-desc">Dark base tones</div></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#D0002E;"></div>
+                        <div><div class="swatch-name">Crimson Red</div><div class="swatch-desc">Dominant leaf colour</div></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#F5A898;"></div>
+                        <div><div class="swatch-name">Blush</div><div class="swatch-desc">Soft light tones</div></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-block" style="background:#F5D0C5;"></div>
+                        <div><div class="swatch-name">Pale Blush</div><div class="swatch-desc">Faded & washed tones</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <footer class="project-pagination">
-            <a href="tussar.html" class="next-project">
-                <span>Next Project</span>
-                <h3>woven design project →</h3>
-            </a>
-        </footer>
-    </main>
+    <!-- 4. MAIN SAMPLES -->
+    <div class="samples-section">
+        <div class="section-tag red reveal">Main Samples</div>
+        <h2 class="section-heading reveal reveal-delay-1">Three <em>translations</em></h2>
+        <div class="samples-grid">
+            <div class="sample-card hero-sample reveal">
+                <img class="sample-img" src="images/Fabric construction 1.jpg" alt="Primary Sample"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder" style="display:none;">Your hero sample</div>
+                <p class="sample-label">Primary Sample</p>
+                <p class="sample-technique">Dyeing + Pintucks</p>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                <div class="sample-card reveal reveal-delay-1">
+                    <img class="sample-img" src="images/Fabric construction 2.jpg" alt="Sample 2"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="display:none; aspect-ratio:3/2;">Sample 02</div>
+                    <p class="sample-label">Sample 02</p>
+                    <p class="sample-technique">Stitching + Dyeing</p>
+                </div>
+                <div class="sample-card reveal reveal-delay-2">
+                    <img class="sample-img" src="images/Fabric construction 3.jpg" alt="Sample 3"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="display:none; aspect-ratio:3/2;">Sample 03</div>
+                    <p class="sample-label">Sample 03</p>
+                    <p class="sample-technique">Pintucks + Manipulation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. COORDINATE SAMPLES -->
+    <div class="coordinates-section">
+        <div class="coord-intro">
+            <div>
+                <div class="section-tag yellow reveal">Coordinate Samples</div>
+                <h2 class="section-heading reveal reveal-delay-1">Ten <em class="lime">variations</em></h2>
+            </div>
+            <p class="body-text reveal reveal-delay-2">
+                Each coordinate sample explores a different combination of technique, colour, and texture — all drawn from the same Aglaonema Lipstick palette.
+                <!-- Replace with your own words -->
+            </p>
+        </div>
+        <div class="coord-grid">
+            <div class="coord-item reveal"><div class="coord-placeholder">01</div></div>
+            <div class="coord-item reveal reveal-delay-1"><div class="coord-placeholder">02</div></div>
+            <div class="coord-item reveal reveal-delay-2"><div class="coord-placeholder">03</div></div>
+            <div class="coord-item reveal"><div class="coord-placeholder">04</div></div>
+            <div class="coord-item reveal reveal-delay-1"><div class="coord-placeholder">05</div></div>
+            <div class="coord-item reveal reveal-delay-2"><div class="coord-placeholder">06</div></div>
+            <div class="coord-item reveal"><div class="coord-placeholder">07</div></div>
+            <div class="coord-item reveal reveal-delay-1"><div class="coord-placeholder">08</div></div>
+            <div class="coord-item reveal reveal-delay-2"><div class="coord-placeholder">09</div></div>
+            <div class="coord-item reveal"><div class="coord-placeholder">10</div></div>
+        </div>
+    </div>
+
+    <!-- NEXT PROJECT -->
+    <div class="next-project">
+        <div>
+            <p class="next-label">Next Project</p>
+            <a href="dyeing.html" class="next-title">Cycle of Emotions →</a>
+        </div>
+        <a href="work.html" class="view-all">View All Work</a>
+    </div>
+
+    <script>
+        // Nav becomes white on scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+
 </body>
 </html>
