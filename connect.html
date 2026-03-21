@@ -16,13 +16,14 @@
         <a href="index.html" class="nav-item">Home</a>
         <a href="work.html" class="nav-item">Work</a>
         <a href="about.html" class="nav-item">About</a>
-        <a href="connect.html" class="nav-item">Connect</a>
+        <a href="connect.html" class="nav-item active">Connect</a>
     </div>
 </nav>
 
     <section class="contact-wrap">
         <h2>Let's collaborate.</h2>
-        <form action="https://formspree.io/f/your-id" method="POST" class="contact-form">
+        <form action="https://api.staticforms.dev/submit" method="post" class="contact-form">
+            <input type="hidden" name="accessKey" value="sf_331c28a7b44b9a5936f627c8">
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" required>
