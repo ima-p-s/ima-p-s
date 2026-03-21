@@ -3,50 +3,610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Detail | Ima P S</title>
+    <title>Cycle of Emotions | Ima P S</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red:     #C0392B;
+            --yellow:  #E8B800;
+            --purple:  #6B3FA0;
+            --blue:    #2C5F8A;
+            --dark:    #111111;
+            --mid:     #888888;
+            --border:  #eeeeee;
+            --white:   #ffffff;
+            --off:     #fafaf8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--white);
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        .concept-section, .techniques-section,
+        .gallery-section, .project-pagination {
+            position: relative;
+            z-index: 1;
+            background: var(--white);
+        }
+
+        /* ── HERO ── */
+        .project-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--dark);
+            z-index: 0;
+        }
+
+        .hero-img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transform: scale(1.05);
+            animation: subtleZoom 10s ease forwards;
+        }
+
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.85) 0%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.3) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 4rem 10%;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.6rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 9rem);
+            font-weight: 300;
+            line-height: 0.95;
+            color: #ffffff;
+            letter-spacing: -0.03em;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+            display: block;
+        }
+
+        .hero-brief {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.55);
+            max-width: 500px;
+            border-left: 1px solid var(--yellow);
+            padding-left: 1.2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        .hero-tags {
+            margin-top: 2rem;
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.9s forwards;
+        }
+
+        .hero-tag {
+            padding: 0.35rem 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ── EMOTION COLOUR STRIP ── */
+        .emotion-strip {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            height: 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .emotion-strip span:nth-child(1) { background: var(--red); }
+        .emotion-strip span:nth-child(2) { background: var(--yellow); }
+        .emotion-strip span:nth-child(3) { background: #c4a0e0; }
+        .emotion-strip span:nth-child(4) { background: #333; }
+        .emotion-strip span:nth-child(5) { background: var(--blue); }
+        .emotion-strip span:nth-child(6) { background: var(--red); }
+
+        /* ── CONCEPT ── */
+        .concept-section {
+            padding: 100px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-eyebrow {
+            font-size: 0.6rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 4rem;
+        }
+
+        /* Emotion journey */
+        .emotion-journey {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin-bottom: 4rem;
+        }
+
+        .emotion-step {
+            padding: 2rem 1.2rem;
+            background: var(--white);
+        }
+
+        .emotion-bar {
+            width: 100%;
+            height: 3px;
+            margin-bottom: 1.2rem;
+        }
+
+        .emotion-step:nth-child(1) .emotion-bar { background: var(--red); }
+        .emotion-step:nth-child(2) .emotion-bar { background: var(--yellow); }
+        .emotion-step:nth-child(3) .emotion-bar { background: #c4a0e0; }
+        .emotion-step:nth-child(4) .emotion-bar { background: #333; }
+        .emotion-step:nth-child(5) .emotion-bar { background: var(--blue); }
+        .emotion-step:nth-child(6) .emotion-bar { background: var(--red); }
+
+        .emotion-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .emotion-desc {
+            font-size: 0.7rem;
+            color: var(--mid);
+            line-height: 1.6;
+        }
+
+        .concept-body {
+            font-size: 0.92rem;
+            line-height: 1.9;
+            color: var(--mid);
+            max-width: 640px;
+        }
+        .concept-body p + p { margin-top: 1rem; }
+
+        /* ── TECHNIQUES ── */
+        .techniques-section {
+            background: var(--off);
+            padding: 100px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin: 3rem 0;
+        }
+
+        .technique-item {
+            padding: 3rem 2rem;
+            background: var(--off);
+        }
+
+        .technique-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--border);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .technique-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .technique-desc {
+            font-size: 0.78rem;
+            color: var(--mid);
+            line-height: 1.7;
+        }
+
+        .dye-types {
+            display: flex;
+            gap: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .dye-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 0.4rem;
+        }
+
+        .dye-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--dark);
+        }
+
+        .dye-note {
+            font-size: 0.72rem;
+            color: var(--mid);
+            margin-top: 0.2rem;
+        }
+
+        /* ── GALLERY ── */
+        .gallery-section {
+            padding: 100px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .gallery-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2.5rem 0 1rem;
+        }
+        .gallery-main .g-item { aspect-ratio: 3/4; }
+
+        .gallery-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .gallery-row .g-item { aspect-ratio: 4/5; }
+
+        .gallery-wide .g-item { aspect-ratio: 21/9; }
+
+        .g-item {
+            overflow: hidden;
+        }
+
+        .g-item img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: grayscale(5%);
+        }
+        .g-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
+
+        .g-placeholder {
+            width: 100%; height: 100%;
+            min-height: 200px;
+            background: var(--off);
+            border: 1px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        /* ── NEXT PROJECT ── */
+        .project-pagination {
+            padding: 60px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .back-to-work {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 3px;
+            transition: 0.3s;
+        }
+        .back-to-work:hover { color: var(--dark); border-color: var(--dark); }
+
+        .next-project-link {
+            text-align: right;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .next-project-link span {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .next-project-link h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--dark);
+        }
+        .next-project-link:hover h3 { color: var(--red); }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.12s; }
+        .reveal-delay-2 { transition-delay: 0.24s; }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes subtleZoom { to { transform: scale(1); } }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .project-hero { height: 100svh; }
+            .hero-content { padding: 3rem 5%; }
+            .concept-section, .techniques-section,
+            .gallery-section { padding: 70px 5%; }
+            .emotion-journey { grid-template-columns: 1fr 1fr; }
+            .techniques-grid { grid-template-columns: 1fr; }
+            .dye-types { flex-direction: column; gap: 1.5rem; }
+            .gallery-main { grid-template-columns: 1fr; }
+            .gallery-row { grid-template-columns: 1fr 1fr; }
+            .gallery-wide .g-item { aspect-ratio: 4/3; }
+            .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">
-        <a href="index.html">Ima P S</a>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo"><a href="index.html">Ima P S</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">About</a>
+            <a href="connect.html">Connect</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO -->
+    <div class="project-hero">
+        <img class="hero-img"
+             src="images/dyeing 0.jpg"
+             alt="Cycle of Emotions"
+             onerror="this.style.display='none';">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Dyeing · NID AP · 2024</p>
+            <h1 class="hero-title">
+                Cycle of<br>
+                <em>Emotions</em>
+            </h1>
+            <p class="hero-brief">
+                A textile art exploring the emotional journey of love — expressed through shibori dyeing on fabric.
+                <!-- Replace with your own words -->
+            </p>
+            <div class="hero-tags">
+                <span class="hero-tag">Nui Shibori</span>
+                <span class="hero-tag">Itajme Shibori</span>
+                <span class="hero-tag">Arashi Shibori</span>
+                <span class="hero-tag">Natural Dye</span>
+                <span class="hero-tag">Chemical Dye</span>
+            </div>
+        </div>
     </div>
 
-    <div class="nav-links">
-        <a href="index.html" class="nav-item">Home</a>
-        <a href="work.html" class="nav-item">Work</a>
-        <a href="about.html" class="nav-item">About</a>
-        <a href="connect.html" class="nav-item">Connect</a>
+    <!-- EMOTION COLOUR STRIP -->
+    <div class="emotion-strip">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
     </div>
-</nav>
-    <main class="project-detail-container">
-        <header class="project-header">
-            <a href="work.html" class="back-link">← Back to Gallery</a>
-            <h1>lace craft documentation</h1>
-            <p class="project-subtitle">craft doc | 6th Semester | NID AP</p>
-        </header>
 
-        <section class="project-content">
-            <div class="large-image">
-                <img src="images/tussar-large-1.jpg" alt="Process">
-            </div>
-            
-            <div class="project-description">
-                <p>Describe your process here. Talk aboutlace craft , the yarn count, and the inspiration behind the weave structure.</p>
-            </div>
+    <!-- 2. CONCEPT -->
+    <div class="concept-section reveal">
+        <span class="section-eyebrow">The Concept</span>
+        <h2 class="section-title">Love is not one feeling.<br>It is <em style="font-style:italic;">all of them.</em></h2>
 
-            <div class="image-grid">
-                <img src="images/tussar-detail-1.jpg" alt="Detail 1">
-                <img src="images/tussar-detail-2.jpg" alt="Detail 2">
+        <div class="emotion-journey">
+            <div class="emotion-step">
+                <div class="emotion-bar"></div>
+                <div class="emotion-name">Love</div>
+                <div class="emotion-desc">Warm, consuming, full of possibility.</div>
             </div>
-        </section>
+            <div class="emotion-step">
+                <div class="emotion-bar"></div>
+                <div class="emotion-name">Happiness</div>
+                <div class="emotion-desc">Golden, radiant, alive.</div>
+            </div>
+            <div class="emotion-step">
+                <div class="emotion-bar"></div>
+                <div class="emotion-name">Vulnerability</div>
+                <div class="emotion-desc">Fear of losing what matters.</div>
+            </div>
+            <div class="emotion-step">
+                <div class="emotion-bar"></div>
+                <div class="emotion-name">Hatred</div>
+                <div class="emotion-desc">Dark, heavy, suffocating.</div>
+            </div>
+            <div class="emotion-step">
+                <div class="emotion-bar"></div>
+                <div class="emotion-name">Sadness</div>
+                <div class="emotion-desc">Blue, quiet, deep.</div>
+            </div>
+            <div class="emotion-step">
+                <div class="emotion-bar"></div>
+                <div class="emotion-name">Love again</div>
+                <div class="emotion-desc">The courage to begin once more.</div>
+            </div>
+        </div>
 
-        <footer class="project-pagination">
-            <a href="surface-design.html" class="next-project">
-                <span>Next Project</span>
-                <h3>surface design →</h3>
-            </a>
-        </footer>
-    </main>
+        <div class="concept-body">
+            <p>
+                A person goes through different emotions in the process of loving someone — from warmth to happiness, then the fear of losing it, vulnerability, things turning ugly, and finally the courage to move on and love again.
+            </p>
+            <p>
+                Each fabric panel represents one stage of this cycle. The colours, patterns, and textures were chosen deliberately — translated through shibori technique into feeling. Life goes on.
+                <!-- Replace with your own words -->
+            </p>
+        </div>
+    </div>
+
+    <!-- 3. TECHNIQUES -->
+    <div class="techniques-section reveal">
+        <span class="section-eyebrow">Techniques</span>
+        <h2 class="section-title">The language<br>of <em style="font-style:italic;">resistance & dye</em></h2>
+
+        <div class="techniques-grid">
+            <div class="technique-item">
+                <div class="technique-number">01</div>
+                <div class="technique-name">Nui Shibori</div>
+                <div class="technique-desc">Stitching and gathering fabric before dyeing. Creates soft, organic resist patterns.</div>
+            </div>
+            <div class="technique-item">
+                <div class="technique-number">02</div>
+                <div class="technique-name">Itajme Shibori</div>
+                <div class="technique-desc">Folding and clamping fabric between boards. Produces sharp geometric patterns.</div>
+            </div>
+            <div class="technique-item">
+                <div class="technique-number">03</div>
+                <div class="technique-name">Arashi Shibori</div>
+                <div class="technique-desc">Wrapping fabric diagonally around a pole. Creates flowing diagonal stripe patterns.</div>
+            </div>
+        </div>
+
+        <div class="dye-types">
+            <div>
+                <div class="dye-label">Dye Type 01</div>
+                <div class="dye-name">Natural Dyeing</div>
+                <div class="dye-note">Plant-based dyes, organic colour</div>
+            </div>
+            <div>
+                <div class="dye-label">Dye Type 02</div>
+                <div class="dye-name">Chemical Dyeing</div>
+                <div class="dye-note">Reactive dyes, bold saturated colour</div>
+            </div>
+            <div>
+                <div class="dye-label">Course Guide</div>
+                <div class="dye-name">Neha Puri Dhir</div>
+                <div class="dye-note">Faculty · NID AP</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. GALLERY -->
+    <div class="gallery-section reveal">
+        <span class="section-eyebrow">The Work</span>
+
+        <div class="gallery-main">
+            <div class="g-item">
+                <img src="images/dyeing 1.jpg" alt="Cycle of Emotions"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="g-placeholder" style="display:none;">dyeing 1</div>
+            </div>
+            <div class="g-item">
+                <img src="images/dyeing 2.jpg" alt="Cycle of Emotions"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="g-placeholder" style="display:none;">dyeing 2</div>
+            </div>
+        </div>
+
+        <div class="gallery-row">
+            <div class="g-item">
+                <img src="images/dyeing 3.jpg" alt="Cycle of Emotions"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="g-placeholder" style="display:none;">Add dyeing 3</div>
+            </div>
+            <div class="g-item">
+                <img src="images/dyeing 4.jpg" alt="Cycle of Emotions"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="g-placeholder" style="display:none;">Add dyeing 4</div>
+            </div>
+            <div class="g-item">
+                <img src="images/dyeing 5.jpg" alt="Cycle of Emotions"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="g-placeholder" style="display:none;">Add dyeing 5</div>
+            </div>
+        </div>
+
+        <div class="gallery-wide">
+            <div class="g-item">
+                <img src="images/dyeing 6.jpg" alt="Cycle of Emotions — full installation"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="g-placeholder" style="display:none;">Add wide installation shot</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEXT PROJECT -->
+    <div class="project-pagination">
+        <a href="work.html" class="back-to-work">← All Work</a>
+        <a href="fabric-construction.html" class="next-project-link">
+            <span>Next Project</span>
+            <h3>Fabric Construction →</h3>
+        </a>
+    </div>
+
+    <script>
+        document.querySelectorAll('.reveal').forEach(el => {
+            new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.08 }).observe(el);
+        });
+    </script>
+
 </body>
 </html>
