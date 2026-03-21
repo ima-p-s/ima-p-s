@@ -31,6 +31,7 @@
             transform: scale(1.05);
             animation: subtleZoom 8s ease forwards;
         }
+
         .hero-placeholder {
             position: absolute; inset: 0;
             display: none;
@@ -356,6 +357,30 @@
             .hero-content { padding: 2rem 5%; flex-direction: column; align-items: flex-start; gap: 1rem; }
             .hero-meta { align-items: flex-start; }
         }
+  .swatches-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 20px;
+    margin-left: 140px;
+    margin-top: 90px;
+    display: block;
+}
+.swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 12px;
+    margin-top: 15px;
+    margin-left: 100px;
+    max-width: 300px;
+}
+.swatch-grid div {
+    aspect-ratio: 1/1;
+    width: 90%;
+}
     </style>
 </head>
 <body>
@@ -375,7 +400,7 @@
     <div class="project-hero">
         <img class="hero-img"
              src="images/Fabric family 01.jpg"
-             alt="Aglaonema Lipstick — All Samples"
+             alt="fabric construction — All Samples"
              onerror="this.style.display='none'; document.querySelector('.hero-placeholder').style.display='flex';">
         <div class="hero-placeholder">
             Add your group photograph here — this will be the hero
@@ -439,48 +464,23 @@
         <h2>The plant that <em class="green">started it all</em></h2>
         <div class="inspiration-grid">
             <div class="plant-photo">
-                <img src="images/Untitled-1.jpg" alt="Aglaonema Lipstick">
+                <img src="images/Fabric construction 00.jpg" alt="Aglaonema Lipstick">
                 <p class="plant-caption">Aglaonema Lipstick — the source</p>
             </div>
             <div>
-                <span class="swatches-label">Colour Story</span>
-                <div class="swatch-row">
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#6aA318;"></div>
-                        <div><div class="swatch-name">Bright Green</div><div class="swatch-desc">Leaf surface, upper mid</div></div>
-                    </div>
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#AACC00;"></div>
-                        <div><div class="swatch-name">Lime</div><div class="swatch-desc">Young leaves, highlights</div></div>
-                    </div>
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#3E6B23;"></div>
-                        <div><div class="swatch-name">Forest Green</div><div class="swatch-desc">Leaf shadow & depth</div></div>
-                    </div>
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#E8B800;"></div>
-                        <div><div class="swatch-name">Yellow Gold</div><div class="swatch-desc">Veining & rib</div></div>
-                    </div>
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#1A2E0A;"></div>
-                        <div><div class="swatch-name">Deep Forest</div><div class="swatch-desc">Dark base tones</div></div>
-                    </div>
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#D0002E;"></div>
-                        <div><div class="swatch-name">Crimson Red</div><div class="swatch-desc">Dominant leaf colour</div></div>
-                    </div>
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#F5A898;"></div>
-                        <div><div class="swatch-name">Blush</div><div class="swatch-desc">Soft light tones</div></div>
-                    </div>
-                    <div class="swatch">
-                        <div class="swatch-block" style="background:#F5D0C5;"></div>
-                        <div><div class="swatch-name">Pale Blush</div><div class="swatch-desc">Faded & washed tones</div></div>
-                    </div>
-                </div>
-                <!-- Replace placeholder with your swatch photo when ready -->
-                <!-- <img src="images/colour_-_Copy.jpg" style="width:100%; margin-top:20px;"> -->
-                <div class="swatch-placeholder">Replace with your colour swatch photo</div>
+<span class="swatches-label">Colour Story</span>
+<div class="swatch-grid">
+    <div style="background:#E8B800;"></div>
+    <div style="background:#AACC00;"></div>
+    <div style="background:#6aA318;"></div>
+    <div style="background:#D0002E;"></div>
+    <div style="background:#1A2E0A;"></div>
+    <div style="background:#3E6B23;"></div>
+    <div style="background:#F5A898;"></div>
+    <div style="background:#F5D0C5;"></div>
+    <div style="background:#FFF5F0; border: 1px solid #eee;"></div>
+</div>
+            
             </div>
         </div>
     </div>
