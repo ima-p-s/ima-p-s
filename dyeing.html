@@ -8,15 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red:     #C0392B;
-            --yellow:  #E8B800;
-            --purple:  #6B3FA0;
-            --blue:    #2C5F8A;
-            --dark:    #111111;
-            --mid:     #888888;
-            --border:  #eeeeee;
-            --white:   #ffffff;
-            --off:     #fafaf8;
+            --red:    #C0392B;
+            --yellow: #E8B800;
+            --purple: #6B3FA0;
+            --blue:   #2C5F8A;
+            --dark:   #111111;
+            --mid:    #888888;
+            --border: #eeeeee;
+            --white:  #ffffff;
+            --off:    #fafaf8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,12 +29,15 @@
             overflow-x: hidden;
         }
 
-        .concept-section, .techniques-section,
-        .gallery-section, .project-pagination {
+        .concept-section, .gallery-section,
+        .samples-section, .credits-section,
+        .project-pagination {
             position: relative;
             z-index: 1;
             background: var(--white);
         }
+        .samples-section { background: var(--off); }
+        .credits-section { background: var(--off); }
 
         /* ── HERO ── */
         .project-hero {
@@ -58,7 +61,7 @@
             background: linear-gradient(
                 to top,
                 rgba(0,0,0,0.85) 0%,
-                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.15) 40%,
                 rgba(0,0,0,0.3) 100%
             );
             z-index: 1;
@@ -98,201 +101,205 @@
             display: block;
         }
 
-        .hero-brief {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.55);
-            max-width: 500px;
-            border-left: 1px solid var(--yellow);
-            padding-left: 1.2rem;
+        .hero-tags {
+            margin-top: 2rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
             opacity: 0;
             animation: fadeUp 1s ease 0.7s forwards;
         }
 
-        .hero-tags {
-            margin-top: 2rem;
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.9s forwards;
-        }
-
-        .hero-tag {
-            padding: 0.35rem 1rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.6rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* ── EMOTION COLOUR STRIP ── */
+        /* ── EMOTION STRIP ── */
         .emotion-strip {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            height: 6px;
+            grid-template-columns: repeat(7, 1fr);
+            height: 5px;
             position: relative;
             z-index: 1;
         }
-        .emotion-strip span:nth-child(1) { background: var(--red); }
-        .emotion-strip span:nth-child(2) { background: var(--yellow); }
+        .emotion-strip span:nth-child(1) { background: #C0392B; }
+        .emotion-strip span:nth-child(2) { background: #E8B800; }
         .emotion-strip span:nth-child(3) { background: #c4a0e0; }
         .emotion-strip span:nth-child(4) { background: #333; }
-        .emotion-strip span:nth-child(5) { background: var(--blue); }
-        .emotion-strip span:nth-child(6) { background: var(--red); }
+        .emotion-strip span:nth-child(5) { background: #2C5F8A; }
+        .emotion-strip span:nth-child(6) { background: #ff9500; }
+        .emotion-strip span:nth-child(7) { background: #C0392B; }
 
-        /* ── CONCEPT ── */
-        .concept-section {
-            padding: 100px 10%;
-            border-bottom: 1px solid var(--border);
-        }
-
+        /* ── SHARED ── */
         .section-eyebrow {
             font-size: 0.6rem;
             letter-spacing: 0.28em;
             text-transform: uppercase;
             color: var(--mid);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             display: block;
         }
 
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 3.5vw, 3.5rem);
-            font-weight: 300;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            color: var(--dark);
-            margin-bottom: 4rem;
+        /* ── CONCEPT ── */
+        .concept-section {
+            padding: 80px 10%;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 6rem;
+            align-items: start;
         }
 
-        /* Emotion journey */
-        .emotion-journey {
+        /* Left column — title + 6 frames */
+        .concept-left {}
+
+        .concept-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 2rem;
+        }
+        .concept-title em { font-style: italic; color: var(--red); }
+
+        /* 6 small frames in left column — 3x2 grid */
+        .panel-frames {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1px;
-            background: var(--border);
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+        }
+
+        .panel-frame {}
+
+        .panel-frame-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: var(--off);
+            border: 1px dashed var(--border);
+        }
+
+        .panel-frame-img img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            pointer-events: none;
+        }
+
+        .panel-frame-placeholder {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        .panel-frame-info {
+            margin-top: 0.4rem;
+        }
+
+        .panel-frame-emotion {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.72rem;
+            font-style: italic;
+            color: var(--dark);
+            display: block;
+        }
+
+        .panel-frame-detail {
+            font-size: 0.58rem;
+            letter-spacing: 0.05em;
+            color: var(--mid);
+            margin-top: 0.1rem;
+            line-height: 1.4;
+        }
+
+        /* Right column */
+        .emotion-journey {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
         }
 
         .emotion-step {
-            padding: 2rem 1.2rem;
-            background: var(--white);
+            flex: 1;
+            padding: 1rem 0.5rem;
+            border-right: 1px solid var(--border);
+            text-align: center;
         }
+        .emotion-step:last-child { border-right: none; }
 
         .emotion-bar {
             width: 100%;
-            height: 3px;
-            margin-bottom: 1.2rem;
+            height: 2px;
+            margin-bottom: 0.8rem;
         }
 
-        .emotion-step:nth-child(1) .emotion-bar { background: var(--red); }
-        .emotion-step:nth-child(2) .emotion-bar { background: var(--yellow); }
-        .emotion-step:nth-child(3) .emotion-bar { background: #c4a0e0; }
-        .emotion-step:nth-child(4) .emotion-bar { background: #333; }
-        .emotion-step:nth-child(5) .emotion-bar { background: var(--blue); }
-        .emotion-step:nth-child(6) .emotion-bar { background: var(--red); }
+        .emotion-step:nth-child(1) .emotion-bar { background: linear-gradient(90deg, #ff6b6b, #C0392B, #8B0000); }
+        .emotion-step:nth-child(2) .emotion-bar { background: linear-gradient(90deg, #ffe066, #E8B800, #f4a100); }
+        .emotion-step:nth-child(3) .emotion-bar { background: linear-gradient(90deg, #d4aaff, #6B3FA0, #3d1a6e); }
+        .emotion-step:nth-child(4) .emotion-bar { background: linear-gradient(90deg, #555, #222, #000); }
+        .emotion-step:nth-child(5) .emotion-bar { background: linear-gradient(90deg, #a8c8e8, #2C5F8A, #1a3a5c); }
+        .emotion-step:nth-child(6) .emotion-bar { background: linear-gradient(90deg, #ffd700, #ff9500, #ff6b35); }
+        .emotion-step:nth-child(7) .emotion-bar { background: linear-gradient(90deg, #ff6b6b, #C0392B, #8B0000); }
 
         .emotion-name {
             font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 300;
+            font-size: 0.7rem;
             font-style: italic;
             color: var(--dark);
-            margin-bottom: 0.5rem;
         }
 
-        .emotion-desc {
-            font-size: 0.7rem;
-            color: var(--mid);
-            line-height: 1.6;
-        }
-
-        .concept-body {
-            font-size: 0.92rem;
+        .concept-note {
+            font-size: 0.88rem;
             line-height: 1.9;
             color: var(--mid);
-            max-width: 640px;
+            margin-bottom: 2rem;
         }
-        .concept-body p + p { margin-top: 1rem; }
+        .concept-note p + p { margin-top: 1rem; }
 
-        /* ── TECHNIQUES ── */
-        .techniques-section {
-            background: var(--off);
-            padding: 100px 10%;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .techniques-grid {
+        /* Three layers */
+        .layers-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1px;
             background: var(--border);
-            margin: 3rem 0;
         }
 
-        .technique-item {
-            padding: 3rem 2rem;
-            background: var(--off);
+        .layer-item {
+            padding: 1.2rem 1rem;
+            background: var(--white);
         }
 
-        .technique-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--border);
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-
-        .technique-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 300;
-            font-style: italic;
-            color: var(--dark);
-            margin-bottom: 0.8rem;
-        }
-
-        .technique-desc {
-            font-size: 0.78rem;
-            color: var(--mid);
-            line-height: 1.7;
-        }
-
-        .dye-types {
-            display: flex;
-            gap: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .dye-label {
-            font-size: 0.6rem;
+        .layer-label {
+            font-size: 0.58rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--mid);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.6rem;
         }
 
-        .dye-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            font-weight: 300;
-            color: var(--dark);
+        .layer-pairs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
         }
 
-        .dye-note {
+        .layer-pair {
             font-size: 0.72rem;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+
+        .layer-pair span {
             color: var(--mid);
-            margin-top: 0.2rem;
+            font-size: 0.65rem;
         }
 
         /* ── GALLERY ── */
         .gallery-section {
-            padding: 100px 10%;
+            padding: 80px 10%;
             border-bottom: 1px solid var(--border);
         }
 
@@ -300,7 +307,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin: 2.5rem 0 1rem;
+            margin: 2rem 0 1rem;
         }
         .gallery-main .g-item { aspect-ratio: 3/4; }
 
@@ -314,10 +321,7 @@
 
         .gallery-wide .g-item { aspect-ratio: 21/9; }
 
-        .g-item {
-            overflow: hidden;
-        }
-
+        .g-item { overflow: hidden; }
         .g-item img {
             width: 100%; height: 100%;
             object-fit: cover; display: block;
@@ -338,6 +342,99 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--mid);
+        }
+
+        /* ── PROCESS SAMPLES ── */
+        .samples-section {
+            padding: 80px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .samples-grid {
+            columns: 5;
+            column-gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .sample-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .sample-item img {
+            width: 100%; display: block;
+            transition: transform 0.5s ease;
+            filter: grayscale(5%);
+        }
+        .sample-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
+
+        .sample-placeholder {
+            width: 100%;
+            background: var(--white);
+            border: 1px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        .sample-item:nth-child(1)  .sample-placeholder { aspect-ratio: 3/4; }
+        .sample-item:nth-child(2)  .sample-placeholder { aspect-ratio: 1/1; }
+        .sample-item:nth-child(3)  .sample-placeholder { aspect-ratio: 4/5; }
+        .sample-item:nth-child(4)  .sample-placeholder { aspect-ratio: 3/4; }
+        .sample-item:nth-child(5)  .sample-placeholder { aspect-ratio: 2/3; }
+        .sample-item:nth-child(6)  .sample-placeholder { aspect-ratio: 1/1; }
+        .sample-item:nth-child(7)  .sample-placeholder { aspect-ratio: 4/3; }
+        .sample-item:nth-child(8)  .sample-placeholder { aspect-ratio: 3/4; }
+        .sample-item:nth-child(9)  .sample-placeholder { aspect-ratio: 1/1; }
+        .sample-item:nth-child(10) .sample-placeholder { aspect-ratio: 2/3; }
+
+        /* Sample label */
+        .sample-label {
+            margin-top: 0.5rem;
+        }
+        .sample-label-technique {
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            color: var(--dark);
+            font-weight: 400;
+        }
+        .sample-label-material {
+            font-size: 0.6rem;
+            color: var(--mid);
+            margin-top: 0.1rem;
+        }
+
+        /* ── CREDITS ── */
+        .credits-section {
+            padding: 60px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .credits-grid {
+            display: flex;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .credit-role {
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 0.3rem;
+        }
+
+        .credit-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--dark);
         }
 
         /* ── NEXT PROJECT ── */
@@ -388,8 +485,6 @@
             transition: opacity 0.9s ease, transform 0.9s ease;
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-delay-1 { transition-delay: 0.12s; }
-        .reveal-delay-2 { transition-delay: 0.24s; }
 
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
         @keyframes subtleZoom { to { transform: scale(1); } }
@@ -398,14 +493,15 @@
         @media (max-width: 900px) {
             .project-hero { height: 100svh; }
             .hero-content { padding: 3rem 5%; }
-            .concept-section, .techniques-section,
-            .gallery-section { padding: 70px 5%; }
-            .emotion-journey { grid-template-columns: 1fr 1fr; }
-            .techniques-grid { grid-template-columns: 1fr; }
-            .dye-types { flex-direction: column; gap: 1.5rem; }
+            .concept-section { grid-template-columns: 1fr; gap: 3rem; padding: 60px 5%; }
+            .gallery-section, .samples-section,
+            .credits-section { padding: 60px 5%; }
+            .layers-grid { grid-template-columns: 1fr; }
             .gallery-main { grid-template-columns: 1fr; }
             .gallery-row { grid-template-columns: 1fr 1fr; }
             .gallery-wide .g-item { aspect-ratio: 4/3; }
+            .samples-grid { columns: 2; }
+            .credits-grid { gap: 2rem; }
             .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
         }
     </style>
@@ -436,118 +532,151 @@
                 Cycle of<br>
                 <em>Emotions</em>
             </h1>
-            <p class="hero-brief">
-                A textile art exploring the emotional journey of love — expressed through shibori dyeing on fabric.
-                <!-- Replace with your own words -->
-            </p>
             <div class="hero-tags">
-                <span class="hero-tag">Nui Shibori</span>
-                <span class="hero-tag">Itajme Shibori</span>
-                <span class="hero-tag">Arashi Shibori</span>
-                <span class="hero-tag">Natural Dye</span>
-                <span class="hero-tag">Chemical Dye</span>
+                Nui Shibori &nbsp;|&nbsp; Itajme Shibori &nbsp;|&nbsp; Arashi Shibori &nbsp;|&nbsp; Natural Dye &nbsp;|&nbsp; Chemical Dye
             </div>
         </div>
     </div>
 
-    <!-- EMOTION COLOUR STRIP -->
+    <!-- EMOTION STRIP -->
     <div class="emotion-strip">
         <span></span><span></span><span></span>
-        <span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
     </div>
 
-    <!-- 2. CONCEPT -->
+    <!-- 2. CONCEPT NOTE -->
     <div class="concept-section reveal">
-        <span class="section-eyebrow">The Concept</span>
-        <h2 class="section-title">Love is not one feeling.<br>It is <em style="font-style:italic;">all of them.</em></h2>
 
-        <div class="emotion-journey">
-            <div class="emotion-step">
-                <div class="emotion-bar"></div>
-                <div class="emotion-name">Love</div>
-                <div class="emotion-desc">Warm, consuming, full of possibility.</div>
-            </div>
-            <div class="emotion-step">
-                <div class="emotion-bar"></div>
-                <div class="emotion-name">Happiness</div>
-                <div class="emotion-desc">Golden, radiant, alive.</div>
-            </div>
-            <div class="emotion-step">
-                <div class="emotion-bar"></div>
-                <div class="emotion-name">Vulnerability</div>
-                <div class="emotion-desc">Fear of losing what matters.</div>
-            </div>
-            <div class="emotion-step">
-                <div class="emotion-bar"></div>
-                <div class="emotion-name">Hatred</div>
-                <div class="emotion-desc">Dark, heavy, suffocating.</div>
-            </div>
-            <div class="emotion-step">
-                <div class="emotion-bar"></div>
-                <div class="emotion-name">Sadness</div>
-                <div class="emotion-desc">Blue, quiet, deep.</div>
-            </div>
-            <div class="emotion-step">
-                <div class="emotion-bar"></div>
-                <div class="emotion-name">Love again</div>
-                <div class="emotion-desc">The courage to begin once more.</div>
+        <!-- LEFT — title + 6 panel frames -->
+        <div class="concept-left">
+            <span class="section-eyebrow">Concept</span>
+            <h2 class="concept-title">Love is not<br>one feeling.<br>It is <em>all of them.</em></h2>
+
+            <div class="panel-frames">
+
+                <div class="panel-frame">
+                    <div class="panel-frame-img">
+                        <img src="images/dyeing technique 1.jpg" alt="Love"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="panel-frame-placeholder">01</div>
+                    </div>
+                    <div class="panel-frame-info">
+                        <span class="panel-frame-emotion">Love</span>
+                        <div class="panel-frame-detail">Nui · Mulberry Silk</div>
+                    </div>
+                </div>
+
+                <div class="panel-frame">
+                    <div class="panel-frame-img">
+                        <img src="images/dyeing technique 2.jpg" alt="Happiness"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="panel-frame-placeholder">02</div>
+                    </div>
+                    <div class="panel-frame-info">
+                        <span class="panel-frame-emotion">Happiness</span>
+                        <div class="panel-frame-detail">Arashi · Mulberry Silk</div>
+                    </div>
+                </div>
+
+                <div class="panel-frame">
+                    <div class="panel-frame-img">
+                        <img src="images/dyeing technique 3.jpg" alt="Vulnerability"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="panel-frame-placeholder">03</div>
+                    </div>
+                    <div class="panel-frame-info">
+                        <span class="panel-frame-emotion">Vulnerability</span>
+                        <div class="panel-frame-detail">Itajme · Cotton</div>
+                    </div>
+                </div>
+
+                <div class="panel-frame">
+                    <div class="panel-frame-img">
+                        <img src="images/dyeing technique 4.jpg" alt="Hatred"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="panel-frame-placeholder">04</div>
+                    </div>
+                    <div class="panel-frame-info">
+                        <span class="panel-frame-emotion">Hatred</span>
+                        <div class="panel-frame-detail">Nui · Cotton</div>
+                    </div>
+                </div>
+
+                <div class="panel-frame">
+                    <div class="panel-frame-img">
+                        <img src="images/dyeing technique 5.jpg" alt="Sadness"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="panel-frame-placeholder">05</div>
+                    </div>
+                    <div class="panel-frame-info">
+                        <span class="panel-frame-emotion">Sadness</span>
+                        <div class="panel-frame-detail">Arashi · Linen</div>
+                    </div>
+                </div>
+
+                <div class="panel-frame">
+                    <div class="panel-frame-img">
+                        <img src="images/dyeing technique 6.jpg" alt="Courage"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="panel-frame-placeholder">06</div>
+                    </div>
+                    <div class="panel-frame-info">
+                        <span class="panel-frame-emotion">Courage</span>
+                        <div class="panel-frame-detail">Itajme · Linen</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="concept-body">
-            <p>
-                A person goes through different emotions in the process of loving someone — from warmth to happiness, then the fear of losing it, vulnerability, things turning ugly, and finally the courage to move on and love again.
-            </p>
-            <p>
-                Each fabric panel represents one stage of this cycle. The colours, patterns, and textures were chosen deliberately — translated through shibori technique into feeling. Life goes on.
+        <!-- RIGHT — emotion journey + concept note + layers -->
+        <div>
+            <div class="emotion-journey">
+                <div class="emotion-step"><div class="emotion-bar"></div><div class="emotion-name">Love</div></div>
+                <div class="emotion-step"><div class="emotion-bar"></div><div class="emotion-name">Happiness</div></div>
+                <div class="emotion-step"><div class="emotion-bar"></div><div class="emotion-name">Vulnerability</div></div>
+                <div class="emotion-step"><div class="emotion-bar"></div><div class="emotion-name">Hatred</div></div>
+                <div class="emotion-step"><div class="emotion-bar"></div><div class="emotion-name">Sadness</div></div>
+                <div class="emotion-step"><div class="emotion-bar"></div><div class="emotion-name">Courage</div></div>
+                <div class="emotion-step"><div class="emotion-bar"></div><div class="emotion-name">Love again</div></div>
+            </div>
+
+            <div class="concept-note">
+                <p>A person goes through different emotions in the process of loving someone — from warmth and happiness, to fear, vulnerability, and darkness. Then the courage to move on, and love again. Life goes on.</p>
+                <p>Each fabric panel represents one stage. The colour, pattern, and texture of each piece was chosen deliberately — translated through shibori into feeling.</p>
                 <!-- Replace with your own words -->
-            </p>
-        </div>
-    </div>
+            </div>
 
-    <!-- 3. TECHNIQUES -->
-    <div class="techniques-section reveal">
-        <span class="section-eyebrow">Techniques</span>
-        <h2 class="section-title">The language<br>of <em style="font-style:italic;">resistance & dye</em></h2>
-
-        <div class="techniques-grid">
-            <div class="technique-item">
-                <div class="technique-number">01</div>
-                <div class="technique-name">Nui Shibori</div>
-                <div class="technique-desc">Stitching and gathering fabric before dyeing. Creates soft, organic resist patterns.</div>
-            </div>
-            <div class="technique-item">
-                <div class="technique-number">02</div>
-                <div class="technique-name">Itajme Shibori</div>
-                <div class="technique-desc">Folding and clamping fabric between boards. Produces sharp geometric patterns.</div>
-            </div>
-            <div class="technique-item">
-                <div class="technique-number">03</div>
-                <div class="technique-name">Arashi Shibori</div>
-                <div class="technique-desc">Wrapping fabric diagonally around a pole. Creates flowing diagonal stripe patterns.</div>
-            </div>
-        </div>
-
-        <div class="dye-types">
-            <div>
-                <div class="dye-label">Dye Type 01</div>
-                <div class="dye-name">Natural Dyeing</div>
-                <div class="dye-note">Plant-based dyes, organic colour</div>
-            </div>
-            <div>
-                <div class="dye-label">Dye Type 02</div>
-                <div class="dye-name">Chemical Dyeing</div>
-                <div class="dye-note">Reactive dyes, bold saturated colour</div>
-            </div>
-            <div>
-                <div class="dye-label">Course Guide</div>
-                <div class="dye-name">Neha Puri Dhir</div>
-                <div class="dye-note">Faculty · NID AP</div>
+            <div class="layers-grid">
+                <div class="layer-item">
+                    <div class="layer-label">Technique — opposite emotions</div>
+                    <div class="layer-pairs">
+                        <div class="layer-pair">Love ↔ Hatred <span>· Nui Shibori</span></div>
+                        <div class="layer-pair">Happiness ↔ Sadness <span>· Arashi Shibori</span></div>
+                        <div class="layer-pair">Vulnerability ↔ Courage <span>· Itajme Shibori</span></div>
+                    </div>
+                </div>
+                <div class="layer-item">
+                    <div class="layer-label">Fabric — adjacent emotions</div>
+                    <div class="layer-pairs">
+                        <div class="layer-pair">Love & Happiness <span>· Mulberry Silk</span></div>
+                        <div class="layer-pair">Vulnerability & Hatred <span>· Cotton</span></div>
+                        <div class="layer-pair">Sadness & Courage <span>· Linen</span></div>
+                    </div>
+                </div>
+                <div class="layer-item">
+                    <div class="layer-label">Hue — connects each pair</div>
+                    <div class="layer-pairs">
+                        <div class="layer-pair">Love ↔ Hatred <span>· <!-- add hue --></span></div>
+                        <div class="layer-pair">Happiness ↔ Sadness <span>· <!-- add hue --></span></div>
+                        <div class="layer-pair">Vulnerability ↔ Courage <span>· <!-- add hue --></span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 4. GALLERY -->
+    <!-- 3. GALLERY -->
     <div class="gallery-section reveal">
         <span class="section-eyebrow">The Work</span>
 
@@ -584,9 +713,136 @@
 
         <div class="gallery-wide">
             <div class="g-item">
-                <img src="images/dyeing 6.jpg" alt="Cycle of Emotions — full installation"
+                <img src="images/dyeing 6.jpg" alt="Cycle of Emotions"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="g-placeholder" style="display:none;">Add wide installation shot</div>
+                <div class="g-placeholder" style="display:none;">Add wide shot</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. PROCESS SAMPLES -->
+    <div class="samples-section reveal">
+        <span class="section-eyebrow">Process Samples</span>
+        <div class="samples-grid">
+
+            <div class="sample-item">
+                <img src="images/dyeing process 1.jpg" alt="Process 1"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">01</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 2.jpg" alt="Process 2"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">02</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 3.jpg" alt="Process 3"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">03</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 4.jpg" alt="Process 4"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">04</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 5.jpg" alt="Process 5"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">05</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 6.jpg" alt="Process 6"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">06</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 7.jpg" alt="Process 7"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">07</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 8.jpg" alt="Process 8"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">08</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 9.jpg" alt="Process 9"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">09</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="images/dyeing process 10.jpg" alt="Process 10"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sample-placeholder">10</div>
+                <div class="sample-label">
+                    <div class="sample-label-technique"><!-- Technique --></div>
+                    <div class="sample-label-material"><!-- Material --></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 5. CREDITS -->
+    <div class="credits-section reveal">
+        <span class="section-eyebrow">Credits</span>
+        <div class="credits-grid">
+            <div>
+                <div class="credit-role">Course Guide</div>
+                <div class="credit-name">Neha Puri Dhir</div>
+            </div>
+            <div>
+                <div class="credit-role">Dyeing Assistant</div>
+                <div class="credit-name"><!-- Add name --></div>
+            </div>
+            <div>
+                <div class="credit-role">Institution</div>
+                <div class="credit-name">NID Andhra Pradesh</div>
             </div>
         </div>
     </div>
