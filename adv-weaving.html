@@ -405,10 +405,14 @@
         @keyframes subtleZoom { to { transform: scale(1); } }
 
         /* ── RESPONSIVE ── */
-        @media (max-width: 900px) {
-            .project-hero { height: 100vw; min-height: 400px; }
-            .hero-img { object-position: center center; }
-            .hero-content { padding: 3rem 5%; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+                @media (max-width: 900px) {
+            .project-hero { height: auto; min-height: unset; }
+            .hero-img { position: relative; height: 100vw; }
+            .hero-content { position: relative; background: var(--white); padding: 2rem 5%; }
+            .hero-eyebrow { color: #0d5b06; }
+            .hero-title { color: #a71515; }
+            .hero-brief { color: #555; border-left-color: var(--yellow); }
+            .hero-meta-item { color: #888; }
             .hero-right { align-items: flex-start; }
             .concept-section { grid-template-columns: 1fr; gap: 3rem; padding: 60px 5%; }
             .gallery-section, .credits-section,
