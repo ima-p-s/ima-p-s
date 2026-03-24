@@ -197,133 +197,6 @@
             color: var(--red);
         }
 
-        /* ══════════════════════════════════════════════════
-           COLOUR EXTRACTION SECTION
-
-           Per unit — THREE columns:
-             Col A  (small)  : 1:1 bird crop square,
-                               vertically centred against col B
-             Col B  (medium) : 1:1 colour/stripe study square
-             Col C  (wide)   : woven fabric sample,
-                               stretches to full height of A + B
-
-           Three units stacked, thin rule between each.
-        ══════════════════════════════════════════════════ */
-        .colour-section {
-            padding: 80px 10%;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .extraction-unit {
-            display: grid;
-            /*  A is half the width of B; C is wider than A+B combined  */
-            grid-template-columns: 1fr 2fr 3fr;
-            column-gap: 20px;
-            align-items: center;   /* centres col A vertically against col B */
-            margin-bottom: 48px;
-        }
-        .extraction-unit:last-child { margin-bottom: 0; }
-
-        /* Col A — small 1:1 bird crop, centred */
-        .ext-bird {
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            background: var(--off);
-            align-self: center;    /* keeps it centred against the taller col B */
-        }
-        .ext-bird img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-        }
-        .ext-bird:hover img { transform: scale(1.06); }
-
-        /* Col B — 1:1 colour / stripe study */
-        .ext-stripe {
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            background: var(--off);
-        }
-        .ext-stripe img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-        }
-        .ext-stripe:hover img { transform: scale(1.06); }
-
-        /* Col C — woven fabric sample, fills the height of A + B */
-        .ext-fabric {
-            align-self: stretch;   /* fills full row height */
-            overflow: hidden;
-            background: var(--off);
-            min-height: 200px;
-        }
-        .ext-fabric img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-        }
-        .ext-fabric:hover img { transform: scale(1.04); }
-
-        /* thin rule between units */
-        .extraction-rule {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin-bottom: 48px;
-        }
-
-        /* caption row — matches the three-column grid */
-        .extraction-labels {
-            display: grid;
-            grid-template-columns: 1fr 2fr 3fr;
-            column-gap: 20px;
-            margin-top: -36px;
-            margin-bottom: 40px;
-        }
-        .ext-label {
-            font-size: 0.56rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--mid);
-            line-height: 1.7;
-        }
-
-        /* ── WEFT EXPLORATIONS ── */
-        .weft-section {
-            padding: 80px 10%;
-            border-bottom: 1px solid var(--border);
-        }
-        .weft-trio {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-        }
-        .weft-item {
-            aspect-ratio: 2 / 5;
-            overflow: hidden;
-            background: var(--off);
-            position: relative;
-        }
-        .weft-item img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-        }
-        .weft-item:hover img { transform: scale(1.04); }
-        .weft-item-label {
-            position: absolute;
-            bottom: 12px; left: 14px;
-            font-size: 0.56rem;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: var(--dark);
-            background: rgba(255,255,255,0.82);
-            padding: 3px 7px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .weft-item:hover .weft-item-label { opacity: 1; }
-
         /* ── STOLE / MAIN SAMPLE ── */
         .stole-section {
             padding: 80px 10%;
@@ -374,6 +247,116 @@
             line-height: 1.3;
         }
         .spec-value em { font-style: italic; color: var(--red); }
+
+        /* ── COLOUR EXTRACTION ── */
+        .colour-section {
+            padding: 80px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .extraction-unit {
+            display: grid;
+            grid-template-columns: 1fr 2fr 3fr;
+            column-gap: 20px;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+        .extraction-unit:last-child { margin-bottom: 0; }
+
+        .ext-bird {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: var(--off);
+            align-self: center;
+        }
+        .ext-bird img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .ext-bird:hover img { transform: scale(1.06); }
+
+        .ext-stripe {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: var(--off);
+        }
+        .ext-stripe img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .ext-stripe:hover img { transform: scale(1.06); }
+
+        .ext-fabric {
+            align-self: stretch;
+            overflow: hidden;
+            background: var(--off);
+            min-height: 200px;
+        }
+        .ext-fabric img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .ext-fabric:hover img { transform: scale(1.04); }
+
+        .extraction-rule {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .extraction-labels {
+            display: grid;
+            grid-template-columns: 1fr 2fr 3fr;
+            column-gap: 20px;
+            margin-top: -36px;
+            margin-bottom: 40px;
+        }
+        .ext-label {
+            font-size: 0.56rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--mid);
+            line-height: 1.7;
+        }
+
+        /* ── WEFT EXPLORATIONS ── */
+        .weft-section {
+            padding: 80px 10%;
+            border-bottom: 16px solid var(--border);
+        }
+        .weft-trio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .weft-item {
+            aspect-ratio: 2 / 5;
+            overflow: hidden;
+            background: var(--off);
+            position: relative;
+        }
+        .weft-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .weft-item:hover img { transform: scale(1.04); }
+        .weft-item-label {
+            position: absolute;
+            bottom: 12px; left: 14px;
+            font-size: 0.56rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--dark);
+            background: rgba(255,255,255,0.82);
+            padding: 3px 7px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .weft-item:hover .weft-item-label { opacity: 1; }
 
         /* ── CREDITS ── */
         .credits-section {
@@ -460,13 +443,13 @@
             .weft-section,
             .stole-section,
             .credits-section { padding: 60px 5%; }
-            .extraction-unit        { grid-template-columns: 1fr 1fr; column-gap: 12px; }
+            .extraction-unit { grid-template-columns: 1fr 1fr; column-gap: 12px; }
             .extraction-unit .ext-fabric { grid-column: span 2; min-height: 220px; aspect-ratio: 16/7; align-self: auto; }
-            .extraction-labels      { grid-template-columns: 1fr 1fr; }
-            .stole-grid             { grid-template-columns: 1fr; }
+            .extraction-labels { grid-template-columns: 1fr 1fr; }
+            .stole-grid { grid-template-columns: 1fr; }
             .stole-grid .g-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
-            .specs-row              { grid-template-columns: 1fr 1fr; }
-            .project-pagination     { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
+            .specs-row { grid-template-columns: 1fr 1fr; }
+            .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
         }
     </style>
 </head>
@@ -483,7 +466,7 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- ① HERO -->
     <div class="project-hero">
         <img class="hero-img" src="images/basic weaving 0.jpg" alt="Malabar Trogon">
         <div class="hero-content">
@@ -509,7 +492,7 @@
 
     <div class="colour-strip"></div>
 
-    <!-- CONCEPT -->
+    <!-- ② THE BIRD -->
     <div class="concept-section reveal">
         <div>
             <span class="section-eyebrow">The Bird</span>
@@ -541,13 +524,42 @@
         </div>
     </div>
 
-    <!-- ══ COLOUR EXTRACTION + WOVEN SAMPLES ══════════════════════
-         Three units. Each unit — three columns:
-           A (small)  — 1:1 bird crop, centred against B
-           B (medium) — 1:1 colour/stripe study
-           C (wide)   — woven fabric sample, full height of row
-         9 images total.
-    ══════════════════════════════════════════════════════════════ -->
+    <!-- ③ THE STOLE — main gallery -->
+    <div class="stole-section reveal">
+        <span class="section-eyebrow">The Main Sample</span>
+        <h2 class="section-title">The <em>Stole</em></h2>
+        <div class="stole-grid">
+            <div class="g-item wide">
+                <img src="images/basic weaving 15.jpg" alt="Stole — full">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 13.jpg" alt="Stole — detail I">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 14.jpg" alt="Stole — detail II">
+            </div>
+        </div>
+        <div class="specs-row">
+            <div class="spec-item">
+                <div class="spec-label">Bird</div>
+                <div class="spec-value"><em>Malabar Trogon</em></div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Weave Structure</div>
+                <div class="spec-value">Plain Weave</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Outcome</div>
+                <div class="spec-value">Woven Stole</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Yarn</div>
+                <div class="spec-value" style="font-size:0.72rem;color:var(--mid);">— add here</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ④ COLOUR EXTRACTION + WOVEN SAMPLES -->
     <div class="colour-section reveal">
         <span class="section-eyebrow">Colour Extraction &amp; Woven Samples</span>
         <h2 class="section-title">Pulling colour<br>from <em>plumage</em></h2>
@@ -612,62 +624,27 @@
 
     </div>
 
-    <!-- WEFT EXPLORATIONS — three verticals 2:5 -->
+    <!-- ⑤ WEFT EXPLORATIONS -->
     <div class="weft-section reveal">
         <span class="section-eyebrow">Weft Explorations</span>
         <h2 class="section-title">Weaving the<br><em>palette</em></h2>
         <div class="weft-trio">
             <div class="weft-item">
-                <img src="images/basic weaving 10.jpg" alt="Weft exploration I">
+                <img src="images/basic weaving weft 1.jpg" alt="Weft exploration I">
                 <span class="weft-item-label">Study I</span>
             </div>
             <div class="weft-item">
-                <img src="images/basic weaving 11.jpg" alt="Weft exploration II">
+                <img src="images/basic weaving weft 2.jpg" alt="Weft exploration II">
                 <span class="weft-item-label">Study II</span>
             </div>
             <div class="weft-item">
-                <img src="images/basic weaving 12.jpg" alt="Weft exploration III">
+                <img src="images/basic weaving weft 3.jpg" alt="Weft exploration III">
                 <span class="weft-item-label">Study III</span>
             </div>
         </div>
     </div>
 
-    <!-- STOLE / MAIN SAMPLE -->
-    <div class="stole-section reveal">
-        <span class="section-eyebrow">The Main Sample</span>
-        <h2 class="section-title">The <em>Stole</em></h2>
-        <div class="stole-grid">
-            <div class="g-item wide">
-                <img src="images/basic weaving 15.jpg" alt="Stole — full">
-            </div>
-            <div class="g-item">
-                <img src="images/basic weaving 13.jpg" alt="Stole — detail I">
-            </div>
-            <div class="g-item">
-                <img src="images/basic weaving 14.jpg" alt="Stole — detail II">
-            </div>
-        </div>
-        <div class="specs-row">
-            <div class="spec-item">
-                <div class="spec-label">Bird</div>
-                <div class="spec-value"><em>Malabar Trogon</em></div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Weave Structure</div>
-                <div class="spec-value">Plain Weave</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Outcome</div>
-                <div class="spec-value">Woven Stole</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Yarn</div>
-                <div class="spec-value" style="font-size:0.72rem;color:var(--mid);">— add here</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CREDITS -->
+    <!-- ⑥ CREDITS -->
     <div class="credits-section reveal">
         <span class="section-eyebrow">Credits</span>
         <div class="credits-grid">
@@ -682,7 +659,7 @@
         </div>
     </div>
 
-    <!-- PAGINATION -->
+    <!-- ⑦ PAGINATION -->
     <div class="project-pagination">
         <a href="work.html" class="back-to-work">← All Work</a>
         <a href="tussar.html" class="next-project-link">
