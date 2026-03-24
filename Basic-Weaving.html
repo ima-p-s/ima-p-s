@@ -3,50 +3,678 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Detail | Ima P S</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Basic Weaving | Ima P S</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green:   #3E6B23;
+            --red:     #C0392B;
+            --yellow:  #E8B800;
+            --dark:    #111111;
+            --mid:     #888888;
+            --border:  #eeeeee;
+            --white:   #ffffff;
+            --off:     #fafaf8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--white);
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 10%;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--dark); }
+
+        /* ── HERO ── */
+        .project-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--dark);
+            padding-top: 0;
+        }
+
+        .hero-img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transform: scale(1.05);
+            animation: subtleZoom 10s ease forwards;
+            opacity: 100;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 4rem 10%;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.2s ease 0.5s forwards;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.6rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 9rem);
+            font-weight: 300;
+            line-height: 0.95;
+            color: #000000;
+            letter-spacing: -0.03em;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: #b00505;
+            display: block;
+        }
+
+        .hero-brief {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: rgba(193, 121, 14, 0.658);
+            max-width: 480px;
+            border-left: 1px solid var(--yellow);
+            padding-left: 1.2rem;
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeUp 1.2s ease 0.8s forwards;
+            flex-shrink: 0;
+        }
+
+        .hero-meta-item {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .colour-strip {
+            height: 5px;
+            background: linear-gradient(90deg,
+                #0055ff 0%, #000000 20%, #ffffff 35%,
+                #e40707 50%, #bc8d0d 65%, #d30303 80%, #000000 100%
+            );
+        }
+
+        /* ── SHARED SECTION STYLES ── */
+        .section-eyebrow {
+            font-size: 0.6rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 3rem;
+        }
+        .section-title em { font-style: italic; color: var(--red); }
+
+        /* ── CONCEPT SECTION ── */
+        .concept-section {
+            padding: 80px 10%;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .concept-img-wrap {
+            width: 75%;
+        }
+        .concept-img-wrap img {
+            width: 100%;
+            display: block;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+        }
+        .concept-sample-caption {
+            margin-top: 0.8rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        .concept-body {
+            font-size: 0.92rem;
+            line-height: 1.9;
+            color: var(--mid);
+        }
+        .concept-body p + p { margin-top: 1.2rem; }
+
+        .bird-tag {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border);
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        /* ── COLOUR EXTRACTION SECTION ── */
+        .colour-section {
+            padding: 80px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* squares grid: 2,3 colour extractions | 1,4 fabric samples */
+        .colour-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .colour-grid .g-item {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+        .colour-grid .g-item img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            filter: grayscale(5%);
+        }
+        .colour-grid .g-item:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+
+        .g-caption {
+            margin-top: 0.6rem;
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        /* ── WEFT EXPLORATION SECTION ── */
+        .weft-section {
+            padding: 80px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* long format weft samples stacked */
+        .weft-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            max-width: 55%;
+            margin: 2rem auto 0;
+        }
+
+        .weft-stack .g-item {
+            width: 100%;
+            overflow: hidden;
+        }
+        .weft-stack .g-item img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .weft-stack .g-item:hover img { transform: scale(1.02); }
+
+        /* pair: 5 & 7 side by side (portrait painted studies) */
+        .weft-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 55%;
+            margin: 0 auto 1.8rem;
+        }
+        .weft-pair .g-item {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+        .weft-pair .g-item img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .weft-pair .g-item:hover img { transform: scale(1.04); }
+
+        /* ── STOLE / MAIN SAMPLE ── */
+        .stole-section {
+            padding: 80px 10%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stole-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stole-grid .g-item {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+        .stole-grid .g-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 16/7;
+        }
+        .stole-grid .g-item img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            filter: grayscale(5%);
+        }
+        .stole-grid .g-item:hover img {
+            transform: scale(1.03);
+            filter: grayscale(0%);
+        }
+
+        /* specs */
+        .specs-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+        .spec-item {
+            padding: 1.4rem 0;
+            border-bottom: 1px solid var(--border);
+            padding-right: 1rem;
+        }
+        .spec-label {
+            font-size: 0.52rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 0.4rem;
+        }
+        .spec-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        .spec-value em { font-style: italic; color: var(--red); }
+
+        /* ── CREDITS ── */
+        .credits-section {
+            padding: 60px 10%;
+            border-bottom: 1px solid var(--border);
+            background: var(--off);
+        }
+        .credits-grid {
+            display: flex;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .credit-role {
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 0.3rem;
+        }
+        .credit-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--dark);
+        }
+
+        /* ── PAGINATION ── */
+        .project-pagination {
+            padding: 60px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+        }
+        .back-to-work {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 3px;
+            transition: 0.3s;
+        }
+        .back-to-work:hover { color: var(--dark); border-color: var(--dark); }
+
+        .next-project-link {
+            text-align: right;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .next-project-link span {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .next-project-link h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--dark);
+        }
+        .next-project-link:hover h3 { color: var(--red); }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes subtleZoom { to { transform: scale(1); } }
+
+        @media (max-width: 900px) {
+            .concept-section { grid-template-columns: 1fr; gap: 3rem; padding: 60px 5%; }
+            .concept-img-wrap { width: 65%; }
+            .colour-section, .weft-section, .stole-section,
+            .credits-section { padding: 60px 5%; }
+            .colour-grid { grid-template-columns: 1fr 1fr; }
+            .weft-stack, .weft-pair { max-width: 100%; }
+            .stole-grid { grid-template-columns: 1fr; }
+            .stole-grid .g-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
+            .specs-row { grid-template-columns: 1fr 1fr; }
+            .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">
-        <a href="index.html">Ima P S</a>
+
+    <nav>
+        <div class="logo"><a href="index.html">Ima P S</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">About</a>
+            <a href="connect.html">Connect</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="project-hero">
+        <img class="hero-img" src="images/basic weaving 0.jpg" alt="Malabar Trogon"
+             onerror="this.style.opacity='0';">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-eyebrow">Basic Weaving · NID AP · 2025</p>
+                <h1 class="hero-title">
+                    Basic<br>
+                    <em>Weaving</em>
+                </h1>
+                <p class="hero-brief">
+                    Inspired by the Malabar Trogon — a bird native to South India —
+                    colour extractions and weft explorations led to a woven stole
+                    capturing the bird's rich palette.
+                </p>
+            </div>
+            <div class="hero-right">
+                <span class="hero-meta-item">Malabar Trogon</span>
+                <span class="hero-meta-item">Weft Exploration</span>
+                <span class="hero-meta-item">Stole</span>
+            </div>
+        </div>
     </div>
 
-    <div class="nav-links">
-        <a href="index.html" class="nav-item">Home</a>
-        <a href="work.html" class="nav-item active">Work</a>
-        <a href="about.html" class="nav-item">About</a>
-        <a href="connect.html" class="nav-item">Connect</a>
+    <div class="colour-strip"></div>
+
+    <!-- CONCEPT -->
+    <div class="concept-section reveal">
+        <div>
+            <span class="section-eyebrow">The Bird</span>
+            <div class="concept-img-wrap">
+                <img src="images/basic weaving 1.jpg" alt="Malabar Trogon illustration"
+                     onerror="this.style.display='none';">
+            </div>
+            <p class="concept-sample-caption">Malabar Trogon · Watercolour</p>
+        </div>
+        <div>
+            <h2 class="section-title">From feather<br>to <em>thread</em></h2>
+            <div class="concept-body">
+                <p>
+                    The Malabar Trogon — with its striking contrast of deep crimson,
+                    velvety black, amber, and electric blue — became the colour vocabulary
+                    for this project.
+                </p>
+                <p>
+                    Beginning with an illustration of the bird, colours were extracted
+                    and translated into stripe palettes. These palettes were then woven
+                    as samples, exploring how different weft sequences alter the rhythm
+                    and mood of the same colour set.
+                </p>
+                <p>
+                    The final outcome is a stole — a wearable textile art where the
+                    Trogon's plumage lives on in every thread crossing.
+                </p>
+            </div>
+            <span class="bird-tag">Harpactes fasciatus · Western Ghats</span>
+        </div>
     </div>
-</nav>
-    <main class="project-detail-container">
-        <header class="project-header">
-            <a href="work.html" class="back-link">← Back to Gallery</a>
-            <h1>Basic Weaving</h1>
-            <p class="project-subtitle">Basic Weaving | 3rd Semester | NID AP</p>
-        </header>
 
-        <section class="project-content">
-            <div class="large-image">
-                <img src="images/tussar-large-1.jpg" alt="Process">
+    <!-- COLOUR EXTRACTIONS + SQUARE SAMPLES -->
+    <div class="colour-section reveal">
+        <span class="section-eyebrow">Colour Extraction &amp; Stripe Studies</span>
+        <h2 class="section-title">Pulling colour<br>from <em>plumage</em></h2>
+        <div class="colour-grid">
+            <div>
+                <div class="g-item">
+                    <img src="images/basic weaving 2.jpg" alt="Sample 1"
+                         onerror="this.style.display='none';">
+                </div>
+                <p class="g-caption">Fabric sample · Black &amp; blue</p>
             </div>
-            
-            <div class="project-description">
-                <p>Describe your process here. Talk about the, the weave structure, and the inspiration behind the concept.</p>
+            <div>
+                <div class="g-item">
+                    <img src="images/basic weaving 3.jpg" alt="Sample 2"
+                         onerror="this.style.display='none';">
+                </div>
+                <p class="g-caption">Eye study · Blue highlight</p>
             </div>
+            <div>
+                <div class="g-item">
+                    <img src="images/basic weaving 4.jpg" alt="Sample 3"
+                         onerror="this.style.display='none';">
+                </div>
+                <p class="g-caption">Stripe palette · Blue &amp; black</p>
+            </div>
+            <div>
+                <div class="g-item">
+                    <img src="images/basic weaving 5.jpg" alt="Sample 4"
+                         onerror="this.style.display='none';">
+                </div>
+                <p class="g-caption">Fabric sample · Red palette</p>
+            </div>
+        </div>
+    </div>
 
-            <div class="image-grid">
-                <img src="images/tussar-detail-1.jpg" alt="Detail 1">
-                <img src="images/tussar-detail-2.jpg" alt="Detail 2">
-            </div>
-        </section>
+    <!-- WEFT EXPLORATIONS -->
+    <div class="weft-section reveal">
+        <span class="section-eyebrow">Weft Explorations</span>
+        <h2 class="section-title">Weaving the<br><em>palette</em></h2>
 
-        <footer class="project-pagination">
-            <a href="tussar.html" class="next-project">
-                <span>Next Project</span>
-                <h3>woven design project →</h3>
-            </a>
-        </footer>
-    </main>
+        <!-- Painted stripe studies pair -->
+        <div class="weft-pair reveal">
+            <div class="g-item">
+                <img src="images/basic weaving 6.jpg" alt="Stripe study"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 8.jpg" alt="Stripe study"
+                     onerror="this.style.display='none';">
+            </div>
+        </div>
+
+        <!-- Woven fabric samples stacked -->
+        <div class="weft-stack reveal">
+            <div class="g-item">
+                <img src="images/basic weaving 6.jpg" alt="Woven sample"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 8.jpg" alt="Woven sample"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 9.jpg" alt="Woven sample"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 10.jpg" alt="Woven sample"
+                     onerror="this.style.display='none';">
+            </div>
+        </div>
+    </div>
+
+    <!-- STOLE / MAIN SAMPLE -->
+    <div class="stole-section reveal">
+        <span class="section-eyebrow">The Main Sample</span>
+        <h2 class="section-title">The <em>Stole</em></h2>
+
+        <div class="stole-grid">
+            <div class="g-item wide">
+                <img src="images/basic weaving 15.jpg" alt="Stole full"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 11.jpg" alt="Stole detail"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 12.jpg" alt="Stole detail"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 13.jpg" alt="Stole detail"
+                     onerror="this.style.display='none';">
+            </div>
+            <div class="g-item">
+                <img src="images/basic weaving 14.jpg" alt="Stole detail"
+                     onerror="this.style.display='none';">
+            </div>
+        </div>
+
+        <div class="specs-row">
+            <div class="spec-item">
+                <div class="spec-label">Bird</div>
+                <div class="spec-value"><em>Malabar Trogon</em></div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Weave Structure</div>
+                <div class="spec-value">Mixed / Multiple</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Outcome</div>
+                <div class="spec-value">Woven Stole</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Yarn</div>
+                <div class="spec-value">— <span style="font-size:0.72rem;color:var(--mid);">add here</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREDITS -->
+    <div class="credits-section reveal">
+        <span class="section-eyebrow">Credits</span>
+        <div class="credits-grid">
+            <div>
+                <div class="credit-role">Course Guide</div>
+                <div class="credit-name">Karthikeyan Balaraman</div>
+            </div>
+            <div>
+                <div class="credit-role">Institution</div>
+                <div class="credit-name">NID Andhra Pradesh</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="project-pagination">
+        <a href="work.html" class="back-to-work">← All Work</a>
+        <a href="adv-weaving.html" class="next-project-link">
+            <span>Next Project</span>
+            <h3>Advanced Weaving →</h3>
+        </a>
+    </div>
+
+    <script>
+        document.querySelectorAll('.reveal').forEach(el => {
+            new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.08 }).observe(el);
+        });
+    </script>
+
 </body>
 </html>
