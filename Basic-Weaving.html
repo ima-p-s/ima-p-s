@@ -7,17 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --green:   #3E6B23;
-            --red:     #C0392B;
-            --yellow:  #E8B800;
-            --dark:    #111111;
-            --mid:     #888888;
-            --border:  #eeeeee;
-            --white:   #ffffff;
-            --off:     #fafaf8;
+            --dark:   #111111;
+            --mid:    #888888;
+            --border: #eeeeee;
+            --white:  #ffffff;
+            --off:    #fafaf8;
+            --red:    #C0392B;
+            --yellow: #E8B800;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background: var(--white);
@@ -27,6 +26,9 @@
             overflow-x: hidden;
         }
 
+        img { display: block; }
+
+        /* ── NAV ── */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -64,18 +66,14 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            background: var(--dark);
-            padding-top: 0;
+            background: #1a1a1a;
         }
-
         .hero-img {
             width: 100%; height: 100%;
             object-fit: cover; display: block;
             transform: scale(1.05);
             animation: subtleZoom 10s ease forwards;
-            opacity: 100;
         }
-
         .hero-content {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -85,13 +83,11 @@
             align-items: flex-end;
             justify-content: space-between;
         }
-
         .hero-text {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 1.2s ease 0.5s forwards;
         }
-
         .hero-eyebrow {
             font-size: 0.6rem;
             letter-spacing: 0.28em;
@@ -99,7 +95,6 @@
             color: var(--yellow);
             margin-bottom: 1rem;
         }
-
         .hero-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(3.5rem, 8vw, 9rem);
@@ -110,20 +105,18 @@
         }
         .hero-title em {
             font-style: italic;
-            color: #b00505;
+            color: rgb(164, 8, 8);
             display: block;
         }
-
         .hero-brief {
             margin-top: 1.5rem;
             font-size: 0.85rem;
             line-height: 1.8;
-            color: rgba(193, 121, 14, 0.658);
+            color: rgba(96, 48, 48, 0.713);
             max-width: 480px;
-            border-left: 1px solid var(--yellow);
+            border-left: 1px solid rgba(78, 39, 39, 0.716);
             padding-left: 1.2rem;
         }
-
         .hero-right {
             display: flex;
             flex-direction: column;
@@ -133,23 +126,21 @@
             animation: fadeUp 1.2s ease 0.8s forwards;
             flex-shrink: 0;
         }
-
         .hero-meta-item {
             font-size: 0.6rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.35);
         }
-
         .colour-strip {
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg,
                 #0055ff 0%, #000000 20%, #ffffff 35%,
                 #e40707 50%, #bc8d0d 65%, #d30303 80%, #000000 100%
             );
         }
 
-        /* ── SHARED SECTION STYLES ── */
+        /* ── SHARED ── */
         .section-eyebrow {
             font-size: 0.6rem;
             letter-spacing: 0.28em;
@@ -158,19 +149,17 @@
             margin-bottom: 1.2rem;
             display: block;
         }
-
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 3vw, 3rem);
             font-weight: 300;
             line-height: 1.1;
             letter-spacing: -0.02em;
-            color: var(--dark);
             margin-bottom: 3rem;
         }
         .section-title em { font-style: italic; color: var(--red); }
 
-        /* ── CONCEPT SECTION ── */
+        /* ── CONCEPT ── */
         .concept-section {
             padding: 80px 10%;
             border-bottom: 1px solid var(--border);
@@ -179,13 +168,9 @@
             gap: 6rem;
             align-items: start;
         }
-
-        .concept-img-wrap {
-            width: 75%;
-        }
+        .concept-img-wrap { width: 75%; }
         .concept-img-wrap img {
             width: 100%;
-            display: block;
             box-shadow: 0 8px 40px rgba(0,0,0,0.12);
         }
         .concept-sample-caption {
@@ -195,14 +180,12 @@
             text-transform: uppercase;
             color: var(--mid);
         }
-
         .concept-body {
             font-size: 0.92rem;
             line-height: 1.9;
             color: var(--mid);
         }
         .concept-body p + p { margin-top: 1.2rem; }
-
         .bird-tag {
             display: inline-block;
             margin-top: 2rem;
@@ -214,133 +197,168 @@
             color: var(--red);
         }
 
-        /* ── COLOUR EXTRACTION SECTION ── */
+        /* ══════════════════════════════════════════════════
+           COLOUR EXTRACTION SECTION
+
+           Per unit — THREE columns:
+             Col A  (small)  : 1:1 bird crop square,
+                               vertically centred against col B
+             Col B  (medium) : 1:1 colour/stripe study square
+             Col C  (wide)   : woven fabric sample,
+                               stretches to full height of A + B
+
+           Three units stacked, thin rule between each.
+        ══════════════════════════════════════════════════ */
         .colour-section {
             padding: 80px 10%;
             border-bottom: 1px solid var(--border);
         }
 
-        /* squares grid: 2,3 colour extractions | 1,4 fabric samples */
-        .colour-grid {
+        .extraction-unit {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
+            /*  A is half the width of B; C is wider than A+B combined  */
+            grid-template-columns: 1fr 2fr 3fr;
+            column-gap: 20px;
+            align-items: center;   /* centres col A vertically against col B */
+            margin-bottom: 48px;
         }
+        .extraction-unit:last-child { margin-bottom: 0; }
 
-        .colour-grid .g-item {
-            aspect-ratio: 3/4;
+        /* Col A — small 1:1 bird crop, centred */
+        .ext-bird {
+            aspect-ratio: 1 / 1;
             overflow: hidden;
+            background: var(--off);
+            align-self: center;    /* keeps it centred against the taller col B */
         }
-        .colour-grid .g-item img {
+        .ext-bird img {
             width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
-            filter: grayscale(5%);
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        .colour-grid .g-item:hover img {
-            transform: scale(1.04);
-            filter: grayscale(0%);
+        .ext-bird:hover img { transform: scale(1.06); }
+
+        /* Col B — 1:1 colour / stripe study */
+        .ext-stripe {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: var(--off);
+        }
+        .ext-stripe img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .ext-stripe:hover img { transform: scale(1.06); }
+
+        /* Col C — woven fabric sample, fills the height of A + B */
+        .ext-fabric {
+            align-self: stretch;   /* fills full row height */
+            overflow: hidden;
+            background: var(--off);
+            min-height: 200px;
+        }
+        .ext-fabric img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .ext-fabric:hover img { transform: scale(1.04); }
+
+        /* thin rule between units */
+        .extraction-rule {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin-bottom: 48px;
         }
 
-        .g-caption {
-            margin-top: 0.6rem;
-            font-size: 0.58rem;
+        /* caption row — matches the three-column grid */
+        .extraction-labels {
+            display: grid;
+            grid-template-columns: 1fr 2fr 3fr;
+            column-gap: 20px;
+            margin-top: -36px;
+            margin-bottom: 40px;
+        }
+        .ext-label {
+            font-size: 0.56rem;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--mid);
+            line-height: 1.7;
         }
 
-        /* ── WEFT EXPLORATION SECTION ── */
+        /* ── WEFT EXPLORATIONS ── */
         .weft-section {
             padding: 80px 10%;
             border-bottom: 1px solid var(--border);
         }
-
-        /* long format weft samples stacked */
-        .weft-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 1.8rem;
-            max-width: 55%;
-            margin: 2rem auto 0;
-        }
-
-        .weft-stack .g-item {
-            width: 100%;
-            overflow: hidden;
-        }
-        .weft-stack .g-item img {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
-        }
-        .weft-stack .g-item:hover img { transform: scale(1.02); }
-
-        /* pair: 5 & 7 side by side (portrait painted studies) */
-        .weft-pair {
+        .weft-trio {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            max-width: 55%;
-            margin: 0 auto 1.8rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
         }
-        .weft-pair .g-item {
-            aspect-ratio: 3/4;
+        .weft-item {
+            aspect-ratio: 2 / 5;
             overflow: hidden;
+            background: var(--off);
+            position: relative;
         }
-        .weft-pair .g-item img {
+        .weft-item img {
             width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        .weft-pair .g-item:hover img { transform: scale(1.04); }
+        .weft-item:hover img { transform: scale(1.04); }
+        .weft-item-label {
+            position: absolute;
+            bottom: 12px; left: 14px;
+            font-size: 0.56rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--dark);
+            background: rgba(255,255,255,0.82);
+            padding: 3px 7px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .weft-item:hover .weft-item-label { opacity: 1; }
 
         /* ── STOLE / MAIN SAMPLE ── */
         .stole-section {
             padding: 80px 10%;
             border-bottom: 1px solid var(--border);
         }
-
         .stole-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 2px;
         }
-
         .stole-grid .g-item {
-            aspect-ratio: 4/3;
+            aspect-ratio: 4 / 3;
             overflow: hidden;
+            background: var(--off);
         }
         .stole-grid .g-item.wide {
             grid-column: span 2;
-            aspect-ratio: 16/7;
+            aspect-ratio: 16 / 7;
         }
         .stole-grid .g-item img {
             width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
-            filter: grayscale(5%);
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        .stole-grid .g-item:hover img {
-            transform: scale(1.03);
-            filter: grayscale(0%);
-        }
+        .stole-grid .g-item:hover img { transform: scale(1.03); }
 
-        /* specs */
         .specs-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0;
             margin-top: 3rem;
             border-top: 1px solid var(--border);
         }
         .spec-item {
-            padding: 1.4rem 0;
+            padding: 1.4rem 1rem 1.4rem 0;
             border-bottom: 1px solid var(--border);
-            padding-right: 1rem;
         }
         .spec-label {
             font-size: 0.52rem;
@@ -353,7 +371,6 @@
             font-family: 'Playfair Display', serif;
             font-size: 0.95rem;
             font-weight: 300;
-            color: var(--dark);
             line-height: 1.3;
         }
         .spec-value em { font-style: italic; color: var(--red); }
@@ -381,7 +398,6 @@
             font-family: 'Playfair Display', serif;
             font-size: 0.95rem;
             font-weight: 300;
-            color: var(--dark);
         }
 
         /* ── PAGINATION ── */
@@ -403,7 +419,6 @@
             transition: 0.3s;
         }
         .back-to-work:hover { color: var(--dark); border-color: var(--dark); }
-
         .next-project-link {
             text-align: right;
             text-decoration: none;
@@ -427,30 +442,37 @@
 
         /* ── REVEAL ── */
         .reveal {
-            opacity: 0; transform: translateY(24px);
+            opacity: 0;
+            transform: translateY(24px);
             transition: opacity 0.9s ease, transform 0.9s ease;
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp     { to { opacity: 1; transform: translateY(0); } }
         @keyframes subtleZoom { to { transform: scale(1); } }
 
+        /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
+            nav { padding: 1.2rem 5%; }
             .concept-section { grid-template-columns: 1fr; gap: 3rem; padding: 60px 5%; }
             .concept-img-wrap { width: 65%; }
-            .colour-section, .weft-section, .stole-section,
+            .colour-section,
+            .weft-section,
+            .stole-section,
             .credits-section { padding: 60px 5%; }
-            .colour-grid { grid-template-columns: 1fr 1fr; }
-            .weft-stack, .weft-pair { max-width: 100%; }
-            .stole-grid { grid-template-columns: 1fr; }
+            .extraction-unit        { grid-template-columns: 1fr 1fr; column-gap: 12px; }
+            .extraction-unit .ext-fabric { grid-column: span 2; min-height: 220px; aspect-ratio: 16/7; align-self: auto; }
+            .extraction-labels      { grid-template-columns: 1fr 1fr; }
+            .stole-grid             { grid-template-columns: 1fr; }
             .stole-grid .g-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
-            .specs-row { grid-template-columns: 1fr 1fr; }
-            .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
+            .specs-row              { grid-template-columns: 1fr 1fr; }
+            .project-pagination     { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAV -->
     <nav>
         <div class="logo"><a href="index.html">Ima P S</a></div>
         <div class="nav-links">
@@ -463,9 +485,7 @@
 
     <!-- HERO -->
     <div class="project-hero">
-        <img class="hero-img" src="images/basic weaving 0.jpg" alt="Malabar Trogon"
-             onerror="this.style.opacity='0';">
-        <div class="hero-overlay"></div>
+        <img class="hero-img" src="images/basic weaving 0.jpg" alt="Malabar Trogon">
         <div class="hero-content">
             <div class="hero-text">
                 <p class="hero-eyebrow">Basic Weaving · NID AP · 2025</p>
@@ -494,8 +514,7 @@
         <div>
             <span class="section-eyebrow">The Bird</span>
             <div class="concept-img-wrap">
-                <img src="images/basic weaving 1.jpg" alt="Malabar Trogon illustration"
-                     onerror="this.style.display='none';">
+                <img src="images/basic weaving 1.jpg" alt="Malabar Trogon illustration">
             </div>
             <p class="concept-sample-caption">Malabar Trogon · Watercolour</p>
         </div>
@@ -522,76 +541,93 @@
         </div>
     </div>
 
-    <!-- COLOUR EXTRACTIONS + SQUARE SAMPLES -->
+    <!-- ══ COLOUR EXTRACTION + WOVEN SAMPLES ══════════════════════
+         Three units. Each unit — three columns:
+           A (small)  — 1:1 bird crop, centred against B
+           B (medium) — 1:1 colour/stripe study
+           C (wide)   — woven fabric sample, full height of row
+         9 images total.
+    ══════════════════════════════════════════════════════════════ -->
     <div class="colour-section reveal">
-        <span class="section-eyebrow">Colour Extraction &amp; Stripe Studies</span>
+        <span class="section-eyebrow">Colour Extraction &amp; Woven Samples</span>
         <h2 class="section-title">Pulling colour<br>from <em>plumage</em></h2>
-        <div class="colour-grid">
-            <div>
-                <div class="g-item">
-                    <img src="images/basic weaving 2.jpg" alt="Sample 1"
-                         onerror="this.style.display='none';">
-                </div>
-                <p class="g-caption">Fabric sample · Black &amp; blue</p>
+
+        <!-- UNIT 1 — Blue / Black -->
+        <div class="extraction-unit">
+            <div class="ext-bird">
+                <img src="images/basic weaving square 1.jpg" alt="Bird crop — blue tones">
             </div>
-            <div>
-                <div class="g-item">
-                    <img src="images/basic weaving 3.jpg" alt="Sample 2"
-                         onerror="this.style.display='none';">
-                </div>
-                <p class="g-caption">Eye study · Blue highlight</p>
+            <div class="ext-stripe">
+                <img src="images/basic weaving square 2.jpg" alt="Colour study — blue palette">
             </div>
-            <div>
-                <div class="g-item">
-                    <img src="images/basic weaving 4.jpg" alt="Sample 3"
-                         onerror="this.style.display='none';">
-                </div>
-                <p class="g-caption">Stripe palette · Blue &amp; black</p>
-            </div>
-            <div>
-                <div class="g-item">
-                    <img src="images/basic weaving 5.jpg" alt="Sample 4"
-                         onerror="this.style.display='none';">
-                </div>
-                <p class="g-caption">Fabric sample · Red palette</p>
+            <div class="ext-fabric">
+                <img src="images/basic weaving square 3.jpg" alt="Woven sample — blue black">
             </div>
         </div>
+        <div class="extraction-labels">
+            <div class="ext-label">Bird crop</div>
+            <div class="ext-label">Colour study<br>Blue &amp; Black</div>
+            <div class="ext-label">Woven sample</div>
+        </div>
+
+        <hr class="extraction-rule">
+
+        <!-- UNIT 2 — Red / Brown -->
+        <div class="extraction-unit">
+            <div class="ext-bird">
+                <img src="images/basic weaving square 4.jpg" alt="Bird crop — red tones">
+            </div>
+            <div class="ext-stripe">
+                <img src="images/basic weaving square 5.jpg" alt="Colour study — red palette">
+            </div>
+            <div class="ext-fabric">
+                <img src="images/basic weaving square 6.jpg" alt="Woven sample — red brown">
+            </div>
+        </div>
+        <div class="extraction-labels">
+            <div class="ext-label">Bird crop</div>
+            <div class="ext-label">Colour study<br>Red &amp; Brown</div>
+            <div class="ext-label">Woven sample</div>
+        </div>
+
+        <hr class="extraction-rule">
+
+        <!-- UNIT 3 — Amber / Ochre -->
+        <div class="extraction-unit">
+            <div class="ext-bird">
+                <img src="images/basic weaving square 7.jpg" alt="Bird crop — amber tones">
+            </div>
+            <div class="ext-stripe">
+                <img src="images/basic weaving square 8.jpg" alt="Colour study — amber palette">
+            </div>
+            <div class="ext-fabric">
+                <img src="images/basic weaving square 9.jpg" alt="Woven sample — amber ochre">
+            </div>
+        </div>
+        <div class="extraction-labels">
+            <div class="ext-label">Bird crop</div>
+            <div class="ext-label">Colour study<br>Amber &amp; Ochre</div>
+            <div class="ext-label">Woven sample</div>
+        </div>
+
     </div>
 
-    <!-- WEFT EXPLORATIONS -->
+    <!-- WEFT EXPLORATIONS — three verticals 2:5 -->
     <div class="weft-section reveal">
         <span class="section-eyebrow">Weft Explorations</span>
         <h2 class="section-title">Weaving the<br><em>palette</em></h2>
-
-        <!-- Painted stripe studies pair -->
-        <div class="weft-pair reveal">
-            <div class="g-item">
-                <img src="images/basic weaving 6.jpg" alt="Stripe study"
-                     onerror="this.style.display='none';">
+        <div class="weft-trio">
+            <div class="weft-item">
+                <img src="images/basic weaving 10.jpg" alt="Weft exploration I">
+                <span class="weft-item-label">Study I</span>
             </div>
-            <div class="g-item">
-                <img src="images/basic weaving 8.jpg" alt="Stripe study"
-                     onerror="this.style.display='none';">
+            <div class="weft-item">
+                <img src="images/basic weaving 11.jpg" alt="Weft exploration II">
+                <span class="weft-item-label">Study II</span>
             </div>
-        </div>
-
-        <!-- Woven fabric samples stacked -->
-        <div class="weft-stack reveal">
-            <div class="g-item">
-                <img src="images/basic weaving 6.jpg" alt="Woven sample"
-                     onerror="this.style.display='none';">
-            </div>
-            <div class="g-item">
-                <img src="images/basic weaving 8.jpg" alt="Woven sample"
-                     onerror="this.style.display='none';">
-            </div>
-            <div class="g-item">
-                <img src="images/basic weaving 9.jpg" alt="Woven sample"
-                     onerror="this.style.display='none';">
-            </div>
-            <div class="g-item">
-                <img src="images/basic weaving 10.jpg" alt="Woven sample"
-                     onerror="this.style.display='none';">
+            <div class="weft-item">
+                <img src="images/basic weaving 12.jpg" alt="Weft exploration III">
+                <span class="weft-item-label">Study III</span>
             </div>
         </div>
     </div>
@@ -600,30 +636,17 @@
     <div class="stole-section reveal">
         <span class="section-eyebrow">The Main Sample</span>
         <h2 class="section-title">The <em>Stole</em></h2>
-
         <div class="stole-grid">
             <div class="g-item wide">
-                <img src="images/basic weaving 15.jpg" alt="Stole full"
-                     onerror="this.style.display='none';">
+                <img src="images/basic weaving 15.jpg" alt="Stole — full">
             </div>
             <div class="g-item">
-                <img src="images/basic weaving 11.jpg" alt="Stole detail"
-                     onerror="this.style.display='none';">
+                <img src="images/basic weaving 13.jpg" alt="Stole — detail I">
             </div>
             <div class="g-item">
-                <img src="images/basic weaving 12.jpg" alt="Stole detail"
-                     onerror="this.style.display='none';">
-            </div>
-            <div class="g-item">
-                <img src="images/basic weaving 13.jpg" alt="Stole detail"
-                     onerror="this.style.display='none';">
-            </div>
-            <div class="g-item">
-                <img src="images/basic weaving 14.jpg" alt="Stole detail"
-                     onerror="this.style.display='none';">
+                <img src="images/basic weaving 14.jpg" alt="Stole — detail II">
             </div>
         </div>
-
         <div class="specs-row">
             <div class="spec-item">
                 <div class="spec-label">Bird</div>
@@ -631,7 +654,7 @@
             </div>
             <div class="spec-item">
                 <div class="spec-label">Weave Structure</div>
-                <div class="spec-value">Mixed / Multiple</div>
+                <div class="spec-value">Plain Weave</div>
             </div>
             <div class="spec-item">
                 <div class="spec-label">Outcome</div>
@@ -639,7 +662,7 @@
             </div>
             <div class="spec-item">
                 <div class="spec-label">Yarn</div>
-                <div class="spec-value">— <span style="font-size:0.72rem;color:var(--mid);">add here</span></div>
+                <div class="spec-value" style="font-size:0.72rem;color:var(--mid);">— add here</div>
             </div>
         </div>
     </div>
@@ -662,16 +685,18 @@
     <!-- PAGINATION -->
     <div class="project-pagination">
         <a href="work.html" class="back-to-work">← All Work</a>
-        <a href="adv-weaving.html" class="next-project-link">
+        <a href="tussar.html" class="next-project-link">
             <span>Next Project</span>
-            <h3>Advanced Weaving →</h3>
+            <h3>Matka Tussar Silk Shrug →</h3>
         </a>
     </div>
 
     <script>
         document.querySelectorAll('.reveal').forEach(el => {
             new IntersectionObserver((entries) => {
-                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
             }, { threshold: 0.08 }).observe(el);
         });
     </script>
