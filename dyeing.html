@@ -351,11 +351,18 @@
         }
 
         .samples-grid {
-            columns: 5;
-            column-gap: 1rem;
+            display: flex;
+            gap: 1rem;
             margin-top: 2.5rem;
+            align-items: flex-start;
         }
 
+        .samples-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
         .sample-item {
             break-inside: avoid;
             margin-bottom: 1.5rem;
@@ -500,7 +507,8 @@
             .gallery-main { grid-template-columns: 1fr; }
             .gallery-row { grid-template-columns: 1fr 1fr; }
             .gallery-wide .g-item { aspect-ratio: 4/3; }
-            .samples-grid { columns: 2; }
+            .samples-grid { flex-wrap: wrap; }
+            .samples-col { flex: 1 1 40%; }
             .credits-grid { gap: 2rem; }
             .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
         }
@@ -723,109 +731,110 @@
     <!-- 4. PROCESS SAMPLES -->
     <div class="samples-section reveal">
         <span class="section-eyebrow">Process Samples</span>
-        <div class="samples-grid">
+       <div class="samples-grid">
 
-            <div class="sample-item">
-                <img src="images/dyeing process 1.jpg" alt="Process 1"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">01</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
+            <!-- Column 1 -->
+            <div class="samples-col">
+                <div class="sample-item">
+                    <img src="images/dyeing process 1.jpg" alt="Process 1"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:3/4;">01</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
+                </div>
+                <div class="sample-item">
+                    <img src="images/dyeing process 6.jpg" alt="Process 6"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:1/1;">06</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="sample-item">
-                <img src="images/dyeing process 2.jpg" alt="Process 2"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">02</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
+            <!-- Column 2 -->
+            <div class="samples-col">
+                <div class="sample-item">
+                    <img src="images/dyeing process 2.jpg" alt="Process 2"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:1/1;">02</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
+                </div>
+                <div class="sample-item">
+                    <img src="images/dyeing process 7.jpg" alt="Process 7"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:4/3;">07</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="sample-item">
-                <img src="images/dyeing process 3.jpg" alt="Process 3"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">03</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
+            <!-- Column 3 -->
+            <div class="samples-col">
+                <div class="sample-item">
+                    <img src="images/dyeing process 3.jpg" alt="Process 3"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:4/5;">03</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
+                </div>
+                <div class="sample-item">
+                    <img src="images/dyeing process 8.jpg" alt="Process 8"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:3/4;">08</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="sample-item">
-                <img src="images/dyeing process 4.jpg" alt="Process 4"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">04</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
+            <!-- Column 4 -->
+            <div class="samples-col">
+                <div class="sample-item">
+                    <img src="images/dyeing process 4.jpg" alt="Process 4"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:3/4;">04</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
+                </div>
+                <div class="sample-item">
+                    <img src="images/dyeing process 9.jpg" alt="Process 9"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:1/1;">09</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="sample-item">
-                <img src="images/dyeing process 5.jpg" alt="Process 5"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">05</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
+            <!-- Column 5 -->
+            <div class="samples-col">
+                <div class="sample-item">
+                    <img src="images/dyeing process 5.jpg" alt="Process 5"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="aspect-ratio:2/3;">05</div>
+                    <div class="sample-label">
+                        <div class="sample-label-technique"></div>
+                        <div class="sample-label-material"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="sample-item">
-                <img src="images/dyeing process 6.jpg" alt="Process 6"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">06</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
-                </div>
-            </div>
-
-            <div class="sample-item">
-                <img src="images/dyeing process 7.jpg" alt="Process 7"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">07</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
-                </div>
-            </div>
-
-            <div class="sample-item">
-                <img src="images/dyeing process 8.jpg" alt="Process 8"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">08</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
-                </div>
-            </div>
-
-            <div class="sample-item">
-                <img src="images/dyeing process 9.jpg" alt="Process 9"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">09</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
-                </div>
-            </div>
-
-            <div class="sample-item">
-                <img src="images/dyeing process 10.jpg" alt="Process 10"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="sample-placeholder">10</div>
-                <div class="sample-label">
-                    <div class="sample-label-technique"><!-- Technique --></div>
-                    <div class="sample-label-material"><!-- Material --></div>
-                </div>
-            </div>
-
-        </div>
+        </div>  
     </div>
 
     <!-- 5. CREDITS -->
