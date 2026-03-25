@@ -231,18 +231,18 @@
         .samples-bg { background: #f8f8f8; }
         .samples-grid {
             display: grid;
-            grid-template-columns: 1.8fr 1fr 1fr;
+            grid-template-columns: 1fr;   /* single column */
             gap: 30px;
             margin-top: 50px;
         }
         .sample-card { overflow: hidden; }
         .sample-img {
-            width: 100%; aspect-ratio: 3/4;
+            width: 100%; aspect-ratio: 4/3;   /* landscape */
             object-fit: cover; display: block;
             filter: grayscale(5%);
             transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .sample-card.hero-sample .sample-img { aspect-ratio: 2/3; }
+        .sample-card.hero-sample .sample-img { aspect-ratio: 4/3; } /* override to landscape too */
         .sample-card:hover .sample-img { filter: grayscale(0%); transform: scale(1.03); }
         .sample-placeholder {
             width: 100%; aspect-ratio: 3/4;
@@ -493,26 +493,29 @@
     <div class="project-section samples-bg reveal">
         <span class="section-label red">Main Samples</span>
         <h2>Three <em>translations</em></h2>
-        <div class="samples-grid">
+            <div class="samples-grid">
+            <!-- Big hero image — full width -->
             <div class="sample-card hero-sample">
                 <img class="sample-img" src="images/Fabric construction 1.jpg" alt="Primary Sample"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="sample-placeholder" style="display:none;">Your hero sample</div>
                 <p class="sample-label">Primary Sample</p>
                 <p class="sample-technique">Dyeing + Pintucks</p>
             </div>
-            <div style="display:flex; flex-direction:column; gap:30px;">
+
+            <!-- Two smaller ones side by side -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px;">
                 <div class="sample-card">
-                    <img class="sample-img" src="images/Fabric construction 2.jpg" alt="Sample 2"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="sample-placeholder" style="display:none; aspect-ratio:3/2;">Sample 02</div>
+                    <img class="sample-img" src="images/Fabric construction 02.jpg" alt="Sample 2"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="display:none;">Sample 02</div>
                     <p class="sample-label">Sample 02</p>
                     <p class="sample-technique">Stitching + Dyeing</p>
                 </div>
                 <div class="sample-card">
                     <img class="sample-img" src="images/Fabric construction 3.jpg" alt="Sample 3"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="sample-placeholder" style="display:none; aspect-ratio:3/2;">Sample 03</div>
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="sample-placeholder" style="display:none;">Sample 03</div>
                     <p class="sample-label">Sample 03</p>
                     <p class="sample-technique">Pintucks + Manipulation</p>
                 </div>
@@ -532,18 +535,49 @@
                 <!-- Replace with your own words -->
             </p>
         </div>
-        <div class="coord-grid">
-            <div class="coord-item reveal"><div class="coord-placeholder">01</div></div>
-            <div class="coord-item reveal reveal-delay-1"><div class="coord-placeholder">02</div></div>
-            <div class="coord-item reveal reveal-delay-2"><div class="coord-placeholder">03</div></div>
-            <div class="coord-item reveal"><div class="coord-placeholder">04</div></div>
-            <div class="coord-item reveal reveal-delay-1"><div class="coord-placeholder">05</div></div>
-            <div class="coord-item reveal reveal-delay-2"><div class="coord-placeholder">06</div></div>
-            <div class="coord-item reveal"><div class="coord-placeholder">07</div></div>
-            <div class="coord-item reveal reveal-delay-1"><div class="coord-placeholder">08</div></div>
-            <div class="coord-item reveal reveal-delay-2"><div class="coord-placeholder">09</div></div>
-            <div class="coord-item reveal"><div class="coord-placeholder">10</div></div>
-        </div>
+            <div class="coord-grid">
+                <div class="coord-item reveal">
+                    <img src="images/Fabric coord 1.jpg" alt="Coordinate 01"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">01</div>
+                </div>
+                <div class="coord-item reveal reveal-delay-1">
+                    <img src="images/Fabric coord 2.jpg" alt="Coordinate 02"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">02</div>
+                </div>
+                <div class="coord-item reveal">
+                    <img src="images/Fabric coord 3.jpg" alt="Coordinate 03"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">03</div>
+                </div>
+                <div class="coord-item reveal reveal-delay-1">
+                    <img src="images/Fabric coord 4.jpg" alt="Coordinate 04"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">04</div>
+                </div>
+                <div class="coord-item reveal">
+                    <img src="images/Fabric coord 5.jpg" alt="Coordinate 05"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">05</div>
+                </div>
+                <div class="coord-item reveal reveal-delay-1">
+                    <img src="images/Fabric coord 6.jpg" alt="Coordinate 06"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">06</div>
+                </div>
+                <div class="coord-item reveal">
+                    <img src="images/Fabric coord 7.jpg" alt="Coordinate 07"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">07</div>
+                </div>
+                <div class="coord-item reveal reveal-delay-1">
+                    <img src="images/Fabric coord 8.jpg" alt="Coordinate 08"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="coord-placeholder" style="display:none;">08</div>
+                </div>
+            
+            </div>
     </div>
 
     <!-- NEXT PROJECT — matches style.css pagination -->
