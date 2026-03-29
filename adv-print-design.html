@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance Print Design | Ima P S</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --saffron:   #C87878;   /* dusty rose — fish tone */
+            --turmeric:  #B8A832;   /* olive yellow */
+            --rose:      #F080A0;   /* saree pink */
+            --teal:      #6EC6E8;   /* sky blue */
+            --cobalt:    #5A9E32;   /* grass green */
+            --mauve:     #9C7040;   /* warm brown */
+            --cream:     #FDF6F8;   /* pink-tinted white */
+            --ink:       #1A1410;
+            --mid:       #7A6A62;
+            --border:    #EADDE2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* nav comes from style.css */
+
+        /* ── HERO ── */
+        .project-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Left — image */
+        .hero-img-panel {
+            position: relative;
+            overflow: hidden;
+            background: #c8c0b8;
+        }
+        .hero-img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transform: scale(1.05);
+            animation: subtleZoom 10s ease forwards;
+        }
+        .hero-img-placeholder {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center; justify-content: center;
+            font-size: 0.6rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: #999;
+            background: #ede8e2;
+            border-right: 1px dashed var(--border);
+        }
+
+        /* Right — text */
+        .hero-text-panel {
+            background: var(--cream);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 5rem 10% 5rem;
+            position: relative;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.58rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #F080A0;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeUp 0.9s ease 0.3s forwards;
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 4.5vw, 6rem);
+            font-weight: 300;
+            line-height: 0.95;
+            color: var(--ink);
+            letter-spacing: -0.03em;
+            opacity: 0;
+            animation: fadeUp 0.9s ease 0.5s forwards;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: #F080A0;
+            display: block;
+        }
+        .hero-subtitle {
+            margin-top: 1.8rem;
+            font-size: 0.82rem;
+            line-height: 1.9;
+            color: var(--mid);
+            max-width: 340px;
+            opacity: 0;
+            animation: fadeUp 0.9s ease 0.7s forwards;
+        }
+        .hero-tags {
+            margin-top: 2.5rem;
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            opacity: 0;
+            animation: fadeUp 0.9s ease 0.9s forwards;
+        }
+
+        /* ── TEMPLE COLOUR STRIP ── */
+        .temple-strip {
+            height: 6px;
+            display: flex;
+        }
+        .temple-strip span { flex: 1; }
+
+        /* ── SHARED SECTION ── */
+        .project-section {
+            padding: 90px 10%;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .project-section:last-of-type { border-bottom: none; }
+
+        .section-eyebrow {
+            font-size: 0.58rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--mid);
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 2.5rem;
+        }
+        .section-title em { font-style: italic; }
+
+        .section-body {
+            font-size: 0.9rem;
+            line-height: 1.9;
+            color: var(--mid);
+            max-width: 600px;
+        }
+        .section-body p + p { margin-top: 1rem; }
+
+        /* ── RESEARCH ── */
+        .research-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .research-facts {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .fact-item {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .fact-item:first-child { border-top: 1px solid var(--border); }
+        .fact-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 0.3rem;
+        }
+        .fact-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--ink);
+        }
+
+        .research-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .research-img-wrap {
+            overflow: hidden;
+            background: var(--border);
+        }
+        .research-img-wrap:first-child {
+            grid-column: 1 / -1;
+            aspect-ratio: 16/7;
+        }
+        .research-img-wrap:not(:first-child) {
+            aspect-ratio: 1/1;
+        }
+        .research-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .research-img-wrap:hover img { transform: scale(1.04); }
+        .img-placeholder {
+            width: 100%; height: 100%;
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mid);
+            background: #F0EAE0;
+            border: 1px dashed var(--border);
+        }
+
+        /* ── DRAWINGS ── */
+        .drawings-section { background: var(--ink); }
+        .drawings-section .section-eyebrow { color: rgba(255,255,255,0.3); }
+        .drawings-section .section-title { color: #fff; }
+        .drawings-section .section-title em { color: var(--turmeric); }
+        .drawings-section .section-body { color: rgba(255,255,255,0.45); }
+
+        .drawings-masonry {
+            margin-top: 3rem;
+            columns: 4;
+            column-gap: 1rem;
+        }
+        .drawing-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+        .drawing-item img {
+            width: 100%; display: block;
+            filter: grayscale(10%);
+            transition: filter 0.6s ease, transform 0.6s ease;
+        }
+        .drawing-item:hover img { filter: grayscale(0%); transform: scale(1.03); }
+        .drawing-placeholder {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px dashed rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+        }
+        .drawing-item:nth-child(1)  .drawing-placeholder { aspect-ratio: 3/4; }
+        .drawing-item:nth-child(2)  .drawing-placeholder { aspect-ratio: 1/1; }
+        .drawing-item:nth-child(3)  .drawing-placeholder { aspect-ratio: 4/5; }
+        .drawing-item:nth-child(4)  .drawing-placeholder { aspect-ratio: 2/3; }
+        .drawing-item:nth-child(5)  .drawing-placeholder { aspect-ratio: 3/4; }
+        .drawing-item:nth-child(6)  .drawing-placeholder { aspect-ratio: 1/1; }
+        .drawing-item:nth-child(7)  .drawing-placeholder { aspect-ratio: 4/3; }
+        .drawing-item:nth-child(8)  .drawing-placeholder { aspect-ratio: 3/4; }
+
+        /* ── MOTIF DEVELOPMENT ── */
+        .motif-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: end;
+            margin-bottom: 3rem;
+        }
+
+        .motif-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .motif-card { }
+        .motif-frame {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: #F0EAE0;
+            border: 1px dashed var(--border);
+            position: relative;
+        }
+        .motif-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.6s ease;
+        }
+        .motif-card:hover .motif-frame img { transform: scale(1.06); }
+        .motif-placeholder {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+        .motif-label {
+            margin-top: 0.7rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--ink);
+        }
+        .motif-sub {
+            font-size: 0.58rem;
+            letter-spacing: 0.08em;
+            color: var(--mid);
+            margin-top: 0.15rem;
+        }
+
+        /* ── PATTERNS ── */
+        .patterns-section { background: #F5EFE6; }
+
+        .patterns-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        .pattern-item { overflow: hidden; }
+        .pattern-item img {
+            width: 100%; display: block;
+            transition: transform 0.7s ease;
+        }
+        .pattern-item:hover img { transform: scale(1.04); }
+        .pattern-frame {
+            background: var(--border);
+            border: 1px dashed #d4c9bb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+        .pattern-item:nth-child(1) .pattern-frame { aspect-ratio: 3/2; }
+        .pattern-item:nth-child(2) .pattern-frame,
+        .pattern-item:nth-child(3) .pattern-frame { aspect-ratio: 1/1; }
+
+        .pattern-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .pattern-row-2 .pattern-frame { aspect-ratio: 4/3; }
+
+        .pattern-label {
+            margin-top: 0.6rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        /* ── FINAL SAREE ── */
+        .saree-section { background: var(--cream); }
+
+        .saree-hero-frame {
+            width: 100%;
+            aspect-ratio: 16/7;
+            overflow: hidden;
+            background: var(--border);
+            margin: 2.5rem 0 1rem;
+            position: relative;
+        }
+        .saree-hero-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 1s ease;
+        }
+        .saree-hero-frame:hover img { transform: scale(1.03); }
+        .saree-placeholder {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            background: #EDE6D8;
+            border: 1px dashed var(--border);
+        }
+
+        .saree-details-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .saree-detail-frame {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: #EDE6D8;
+            border: 1px dashed var(--border);
+        }
+        .saree-detail-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.8s ease;
+        }
+        .saree-detail-frame:hover img { transform: scale(1.04); }
+        .saree-detail-placeholder {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+
+        /* ── MOCKUPS ── */
+        .mockups-section { background: var(--ink); }
+        .mockups-section .section-eyebrow { color: rgba(255,255,255,0.3); }
+        .mockups-section .section-title { color: #fff; }
+        .mockups-section .section-title em { color: var(--rose); }
+        .mockups-section .section-body { color: rgba(255,255,255,0.4); }
+
+        .mockups-grid {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 1rem;
+        }
+        .mockup-item { overflow: hidden; position: relative; }
+        .mockup-item img {
+            width: 100%; display: block;
+            transition: transform 0.8s ease;
+        }
+        .mockup-item:hover img { transform: scale(1.03); }
+        .mockup-placeholder {
+            background: rgba(255,255,255,0.04);
+            border: 1px dashed rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+        }
+        .mockup-item:nth-child(1) .mockup-placeholder { aspect-ratio: 4/3; }
+        .mockup-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .mockup-item.small .mockup-placeholder { aspect-ratio: 3/2; }
+
+        /* ── CREDITS ── */
+        .credits-section {
+            padding: 60px 10%;
+            border-bottom: 1px solid var(--border);
+            background: var(--cream);
+        }
+        .credits-grid {
+            display: flex;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .credit-role {
+            font-size: 0.55rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 0.3rem;
+        }
+        .credit-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--ink);
+        }
+
+        /* ── PAGINATION ── */
+        .project-pagination {
+            padding: 60px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            background: var(--cream);
+        }
+        .back-to-work {
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 3px;
+            transition: 0.3s;
+        }
+        .back-to-work:hover { color: var(--ink); border-color: var(--ink); }
+        .next-project-link {
+            text-align: right;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .next-project-link span {
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .next-project-link h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--ink);
+        }
+        .next-project-link:hover h3 { color: var(--saffron); }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.85s ease, transform 0.85s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes fishReveal {
+            from { opacity: 0; transform: translateX(-30px) rotate(-8deg); }
+            to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .project-hero { grid-template-columns: 1fr; grid-template-rows: 50vw auto; height: auto; }
+            .hero-text-panel { padding: 3rem 6% 4rem; }
+            .hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .project-hero { grid-template-columns: 1fr; min-height: auto; }
+            .hero-left { height: 50vw; }
+            .hero-right { padding: 3rem 6% 4rem; }
+            .research-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .drawings-masonry { columns: 2; }
+            .motif-grid { grid-template-columns: repeat(2, 1fr); }
+            .motif-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+            .patterns-row { grid-template-columns: 1fr; }
+            .pattern-row-2 { grid-template-columns: 1fr 1fr; }
+            .saree-details-row { grid-template-columns: 1fr 1fr; }
+            .mockups-grid { grid-template-columns: 1fr; }
+            .project-section { padding: 60px 6%; }
+            .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 6%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo"><a href="index.html">Ima P S</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="work.html" class="active">Work</a>
+            <a href="about.html">About</a>
+            <a href="connect.html">Connect</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO -->
+    <div class="project-hero">
+
+        <!-- Left — image -->
+        <div class="hero-img-panel">
+            <img class="hero-img"
+                 src="images/adv print hero.jpg"
+                 alt="Godavari Pulasa"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="hero-img-placeholder">Add hero image</div>
+        </div>
+
+        <!-- Right — text -->
+        <div class="hero-text-panel">
+            <p class="hero-eyebrow">Advance Print Design · NID AP · 2025</p>
+            <h1 class="hero-title">
+                Godavari<br>
+                <em>Pulasa</em>
+            </h1>
+            <p class="hero-subtitle">
+                A saree born from a fish. From the Godavari river to the loom — the Pulasa Hilsa translated into motif, pattern, and print on cotton.
+            </p>
+            <div class="hero-tags">
+                Screen Printing &nbsp;|&nbsp; Block Printing &nbsp;|&nbsp; Cotton &nbsp;|&nbsp; Andhra Pradesh
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TEMPLE COLOUR STRIP -->
+    <div class="temple-strip">
+        <span style="background:#F080A0;"></span>
+        <span style="background:#6EC6E8;"></span>
+        <span style="background:#5A9E32;"></span>
+        <span style="background:#B8A832;"></span>
+        <span style="background:#9C7040;"></span>
+        <span style="background:#C87878;"></span>
+        <span style="background:#F080A0;"></span>
+    </div>
+
+    <!-- 2. RESEARCH & INSPIRATION -->
+    <div class="project-section reveal">
+        <div class="research-grid">
+            <div>
+                <span class="section-eyebrow">Research & Inspiration</span>
+                <h2 class="section-title">The fish that<br>defines a <em>river</em></h2>
+                <div class="research-facts">
+                    <div class="fact-item">
+                        <div class="fact-label">Fish</div>
+                        <div class="fact-value">Tenualosa Ilisha — Pulasa Hilsa</div>
+                    </div>
+                    <div class="fact-item">
+                        <div class="fact-label">River</div>
+                        <div class="fact-value">Godavari, Andhra Pradesh</div>
+                    </div>
+                    <div class="fact-item">
+                        <div class="fact-label">Season</div>
+                        <div class="fact-value">Monsoon — July to September</div>
+                    </div>
+                    <div class="fact-item">
+                        <div class="fact-label">Significance</div>
+                        <div class="fact-value">Cultural delicacy, symbol of the delta</div>
+                    </div>
+                    <div class="fact-item">
+                        <div class="fact-label">Technique</div>
+                        <div class="fact-value">Screen Print · Block Print · Cotton</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-body" style="margin-bottom:2rem;">
+                    <p>The Godavari Pulasa is not just a fish — it is a seasonal event in Andhra Pradesh. Available only during the monsoon floods, it is prized for its taste and carries deep cultural weight in the delta communities.</p>
+                    <p>From its scale patterns to its silhouette against the river, the Pulasa offered a rich visual vocabulary to work with — one that felt both local and timeless.</p>
+                </div>
+                <div class="research-images">
+                    <div class="research-img-wrap">
+                        <img src="images/print research 1.jpg" alt="Pulasa fish research"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="img-placeholder" style="display:none;">Pulasa — reference image</div>
+                    </div>
+                    <div class="research-img-wrap">
+                        <img src="images/print research 2.jpg" alt="Godavari river"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="img-placeholder" style="display:none;">Godavari river</div>
+                    </div>
+                    <div class="research-img-wrap">
+                        <img src="images/print research 3.jpg" alt="Scale detail"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="img-placeholder" style="display:none;">Scale detail</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. DRAWINGS / SKETCHES -->
+    <div class="project-section drawings-section reveal">
+        <span class="section-eyebrow">Drawings & Sketches</span>
+        <h2 class="section-title">Observing the <em>form</em></h2>
+        <div class="section-body">
+            <p>Before any motif was made, the fish was studied closely — its body curve, the arc of its scales, the geometry of its fins. Sketches moved from naturalistic observation to simplified, printable form.</p>
+        </div>
+        <div class="drawings-masonry">
+            <div class="drawing-item">
+                <img src="images/print drawing 1.jpg" alt="Fish sketch 1"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">01</div>
+            </div>
+            <div class="drawing-item">
+                <img src="images/print drawing 2.jpg" alt="Fish sketch 2"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">02</div>
+            </div>
+            <div class="drawing-item">
+                <img src="images/print drawing 3.jpg" alt="Fish sketch 3"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">03</div>
+            </div>
+            <div class="drawing-item">
+                <img src="images/print drawing 4.jpg" alt="Fish sketch 4"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">04</div>
+            </div>
+            <div class="drawing-item">
+                <img src="images/print drawing 5.jpg" alt="Fish sketch 5"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">05</div>
+            </div>
+            <div class="drawing-item">
+                <img src="images/print drawing 6.jpg" alt="Fish sketch 6"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">06</div>
+            </div>
+            <div class="drawing-item">
+                <img src="images/print drawing 7.jpg" alt="Fish sketch 7"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">07</div>
+            </div>
+            <div class="drawing-item">
+                <img src="images/print drawing 8.jpg" alt="Fish sketch 8"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="drawing-placeholder">08</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MOTIF DEVELOPMENT -->
+    <div class="project-section reveal">
+        <div class="motif-intro">
+            <div>
+                <span class="section-eyebrow">Motif Development</span>
+                <h2 class="section-title">Sketch to <em>stamp</em></h2>
+            </div>
+            <div class="section-body">
+                <p>Each motif was refined from the drawings — simplified into printable units that could tile, repeat, and breathe together on the cloth. Scales, silhouettes, fins, and water ripples each became their own motif family.</p>
+            </div>
+        </div>
+        <div class="motif-grid">
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 1.jpg" alt="Motif 1"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">01</div>
+                </div>
+                <div class="motif-label">Fish silhouette</div>
+                <div class="motif-sub">Primary motif</div>
+            </div>
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 2.jpg" alt="Motif 2"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">02</div>
+                </div>
+                <div class="motif-label">Scale arc</div>
+                <div class="motif-sub">Fill motif</div>
+            </div>
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 3.jpg" alt="Motif 3"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">03</div>
+                </div>
+                <div class="motif-label">Dorsal fin</div>
+                <div class="motif-sub">Border motif</div>
+            </div>
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 4.jpg" alt="Motif 4"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">04</div>
+                </div>
+                <div class="motif-label">Water ripple</div>
+                <div class="motif-sub">Background motif</div>
+            </div>
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 5.jpg" alt="Motif 5"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">05</div>
+                </div>
+                <div class="motif-label">Tail fan</div>
+                <div class="motif-sub">Accent motif</div>
+            </div>
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 6.jpg" alt="Motif 6"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">06</div>
+                </div>
+                <div class="motif-label">Eye detail</div>
+                <div class="motif-sub">Spot motif</div>
+            </div>
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 7.jpg" alt="Motif 7"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">07</div>
+                </div>
+                <div class="motif-label">Lotus & fish</div>
+                <div class="motif-sub">Pallu motif</div>
+            </div>
+            <div class="motif-card">
+                <div class="motif-frame">
+                    <img src="images/print motif 8.jpg" alt="Motif 8"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="motif-placeholder">08</div>
+                </div>
+                <div class="motif-label">Border band</div>
+                <div class="motif-sub">Repeat unit</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. PATTERNS -->
+    <div class="project-section patterns-section reveal">
+        <span class="section-eyebrow">Patterns</span>
+        <h2 class="section-title">Motifs in <em>repeat</em></h2>
+        <div class="section-body">
+            <p>Motifs were arranged into repeating patterns — half-drop, mirror, and ogee layouts — tested on paper before moving to screen and block.</p>
+        </div>
+
+        <div class="patterns-row">
+            <div class="pattern-item">
+                <img src="images/print pattern 1.jpg" alt="Pattern 1"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="pattern-frame">Body repeat</div>
+                <div class="pattern-label">Half-drop · Fish silhouette</div>
+            </div>
+            <div class="pattern-item">
+                <img src="images/print pattern 2.jpg" alt="Pattern 2"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="pattern-frame">Scale fill</div>
+                <div class="pattern-label">Ogee · Scale arc</div>
+            </div>
+            <div class="pattern-item">
+                <img src="images/print pattern 3.jpg" alt="Pattern 3"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="pattern-frame">Border</div>
+                <div class="pattern-label">Linear · Fin band</div>
+            </div>
+        </div>
+        <div class="pattern-row-2">
+            <div class="pattern-item">
+                <img src="images/print pattern 4.jpg" alt="Pattern 4"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="pattern-frame">Pallu layout</div>
+                <div class="pattern-label">Mirror · Lotus-fish</div>
+            </div>
+            <div class="pattern-item">
+                <img src="images/print pattern 5.jpg" alt="Pattern 5"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="pattern-frame">Colour way 1</div>
+                <div class="pattern-label">Saffron + Teal</div>
+            </div>
+            <div class="pattern-item">
+                <img src="images/print pattern 6.jpg" alt="Pattern 6"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="pattern-frame">Colour way 2</div>
+                <div class="pattern-label">Rose + Cobalt</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. FINAL SAREE -->
+    <div class="project-section saree-section reveal">
+        <span class="section-eyebrow">Final Saree</span>
+        <h2 class="section-title">The cloth that <em>remembers</em> the river</h2>
+        <div class="section-body">
+            <p>The final saree brings all layers together — screen-printed body, block-printed border, and a hand-detailed pallu. Cotton ground, Andhra palette, Godavari soul.</p>
+        </div>
+
+        <div class="saree-hero-frame">
+            <img src="images/print saree 1.jpg" alt="Final Saree"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="saree-placeholder">Final saree — full length</div>
+        </div>
+
+        <div class="saree-details-row">
+            <div class="saree-detail-frame">
+                <img src="images/print saree 2.jpg" alt="Saree border detail"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="saree-detail-placeholder">Border detail</div>
+            </div>
+            <div class="saree-detail-frame">
+                <img src="images/print saree 3.jpg" alt="Saree pallu"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="saree-detail-placeholder">Pallu</div>
+            </div>
+            <div class="saree-detail-frame">
+                <img src="images/print saree 4.jpg" alt="Saree body print"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="saree-detail-placeholder">Body print</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. MOCKUPS -->
+    <div class="project-section mockups-section reveal">
+        <span class="section-eyebrow">Mockups</span>
+        <h2 class="section-title">Worn & <em>draped</em></h2>
+        <div class="section-body">
+            <p>Visualising how the saree comes alive when draped — the print in motion, the border at the hem, the pallu over the shoulder.</p>
+        </div>
+        <div class="mockups-grid">
+            <div class="mockup-item">
+                <img src="images/print mockup 1.jpg" alt="Mockup 1"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="mockup-placeholder">Draped mockup</div>
+            </div>
+            <div class="mockup-right">
+                <div class="mockup-item small">
+                    <img src="images/print mockup 2.jpg" alt="Mockup 2"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="mockup-placeholder">Detail mockup</div>
+                </div>
+                <div class="mockup-item small">
+                    <img src="images/print mockup 3.jpg" alt="Mockup 3"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="mockup-placeholder">Pallu mockup</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. CREDITS -->
+    <div class="credits-section reveal">
+        <span class="section-eyebrow">Credits</span>
+        <div class="credits-grid">
+            <div>
+                <div class="credit-role">Course Guide</div>
+                <div class="credit-name"><!-- Add name --></div>
+            </div>
+            <div>
+                <div class="credit-role">Institution</div>
+                <div class="credit-name">NID Andhra Pradesh</div>
+            </div>
+            <div>
+                <div class="credit-role">Year</div>
+                <div class="credit-name">2025</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="project-pagination">
+        <a href="work.html" class="back-to-work">← All Work</a>
+        <a href="dyeing.html" class="next-project-link">
+            <span>Next Project</span>
+            <h3>Cycle of Emotions →</h3>
+        </a>
+    </div>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.07 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
