@@ -451,6 +451,71 @@
             .specs-row { grid-template-columns: 1fr 1fr; }
             .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
         }
+       /* ── WEAVE CLOSE-UPS ── */
+.zoom-section {
+    padding: 80px 10%;
+    border-bottom: 1px solid var(--border);
+}
+
+.zoom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns */
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.zoom-item {
+    aspect-ratio: 16 / 6;
+    overflow: hidden;
+    background: var(--off);
+}
+
+/* zoom 7 — full width below the grid */
+.zoom-item--wide {
+    width: 100%;
+    aspect-ratio: 16 / 6;
+    overflow: hidden;
+    background: var(--off);
+    margin-bottom: 10px;
+}
+
+.zoom-item img,
+.zoom-item--wide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.zoom-item:hover img,
+.zoom-item--wide:hover img {
+    transform: scale(1.05);
+}
+
+/* Check spotlight */
+.zoom-check-wrap {
+    margin-top: 40px;
+}
+
+.zoom-check-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.zoom-check-caption {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 0.8rem;
+}
+
+@media (max-width: 900px) {
+    .zoom-grid { grid-template-columns: 1fr; }
+    .zoom-item--wide { aspect-ratio: 4/3; }
+    .zoom-section { padding: 60px 5%; }
+}
     </style>
 </head>
 <body>
@@ -564,6 +629,33 @@
             </div>
         </div>
     </div>
+
+   <!-- ③.⑤ WEAVE CLOSE-UPS -->
+<div class="zoom-section reveal">
+    <span class="section-eyebrow">Weave Close-ups</span>
+    <h2 class="section-title">The <em>structure</em></h2>
+
+    <!-- zoom 1–6 in 2 col × 3 row grid -->
+    <div class="zoom-grid">
+        <div class="zoom-item"><img src="images/basic weaving zoom1.jpg" alt="Weave close-up 1"></div>
+        <div class="zoom-item"><img src="images/basic weaving zoom2.jpg" alt="Weave close-up 2"></div>
+        <div class="zoom-item"><img src="images/basic weaving zoom3.jpg" alt="Weave close-up 3"></div>
+        <div class="zoom-item"><img src="images/basic weaving zoom4.jpg" alt="Weave close-up 4"></div>
+        <div class="zoom-item"><img src="images/basic weaving zoom5.jpg" alt="Weave close-up 5"></div>
+        <div class="zoom-item"><img src="images/basic weaving zoom6.jpg" alt="Weave close-up 6"></div>
+    </div>
+
+    <!-- zoom 7 — full width -->
+    <div class="zoom-item zoom-item--wide">
+        <img src="images/basic weaving zoom7.jpg" alt="Weave close-up 7">
+    </div>
+
+    <!-- check — spotlight -->
+    <div class="zoom-check-wrap">
+        <img src="images/basic weaving check.jpg" alt="Weave check pattern">
+        <p class="zoom-check-caption">Check Pattern</p>
+    </div>
+</div>
 
     <!-- ④ COLOUR EXTRACTION + WOVEN SAMPLES -->
     <div class="colour-section reveal">
