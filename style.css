@@ -133,7 +133,7 @@ nav {
 }
 
 .profile-frame img { 
-    width: 100%; 
+    width: 220px; 
     aspect-ratio: 4/5; 
     object-fit: cover; 
     background: var(--light); 
