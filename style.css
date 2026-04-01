@@ -502,4 +502,30 @@ footer {
         flex-direction: column;
         gap: 2.5rem;
     }
+}/* --- CV Header Row with Download Button --- */
+.cv-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.cv-header-row h3 {
+    margin-bottom: 0; /* override the existing h3 margin */
+}
+
+.cv-download-btn {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px 24px;
+    border: 1px solid var(--text);
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.cv-download-btn:hover {
+    background: var(--text);
+    color: var(--bg);
 }
