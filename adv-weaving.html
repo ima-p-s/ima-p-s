@@ -4,500 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Weaving | Ima P S</title>
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green:   #3E6B23;
-            --red:     #C0392B;
-            --yellow:  #E8B800;
-            --dark:    #111111;
-            --mid:     #888888;
-            --border:  #eeeeee;
-            --white:   #ffffff;
-            --off:     #fafaf8;
-        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background: var(--white);
-            color: var(--dark);
-            font-family: 'Inter', sans-serif;
-            font-weight: 300;
-            overflow-x: hidden;
-        }
-
-        .concept-section, .gallery-section,
-        .process-link-section, .credits-section,
-        .project-pagination {
-            position: relative;
-            z-index: 1;
-            background: var(--white);
-        }
-        .credits-section { background: var(--off); }
-
-        .project-hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            background: var(--white);
-            z-index: 0;
-        }
-
-        .hero-img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transform: scale(1.05);
-            animation: subtleZoom 10s ease forwards;
-        }
-
-        .hero-content {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 4rem 10%;
-            z-index: 2;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-        }
-
-        .hero-text {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 1.2s ease 0.5s forwards;
-        }
-
-        .hero-eyebrow {
-            font-size: 0.6rem;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            color: #0d5b06;
-            margin-bottom: 1rem;
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3.5rem, 8vw, 9rem);
-            font-weight: 300;
-            line-height: 0.95;
-            color: #a71515;
-            letter-spacing: -0.03em;
-        }
-
-        .hero-title em {
-            font-style: italic;
-            color: #0d5b06;
-            display: block;
-        }
-
-        .hero-brief {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            line-height: 1.8;
-            color: rgba(64, 64, 64, 0.55);
-            max-width: 480px;
-            border-left: 1px solid var(--yellow);
-            padding-left: 1.2rem;
-        }
-
-        .hero-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0.5rem;
-            opacity: 0;
-            animation: fadeUp 1.2s ease 0.8s forwards;
-            flex-shrink: 0;
-        }
-
-        .hero-meta-item {
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: rgba(110, 10, 10, 0.35);
-        }
-
-        .colour-strip {
-            height: 5px;
-            background: linear-gradient(90deg,
-                #3E6B23 0%, #6aA318 15%, #AACC00 30%,
-                #E8B800 45%, #C0392B 60%, #8B0000 75%, #3E6B23 100%
-            );
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-eyebrow {
-            font-size: 0.6rem;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 1.2rem;
-            display: block;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 3vw, 3rem);
-            font-weight: 300;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            color: var(--dark);
-            margin-bottom: 3rem;
-        }
-        .section-title em { font-style: italic; color: var(--green); }
-
-        .concept-section {
-            padding: 80px 10%;
-            border-bottom: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 1fr 1.6fr;
-            gap: 6rem;
-            align-items: start;
-        }
-
-        .concept-sample { width: 62%; }
-
-        .concept-sample img {
-            width: 100%;
-            display: block;
-            pointer-events: none;
-        }
-
-        .concept-sample-caption {
-            margin-top: 0.8rem;
-            font-size: 0.62rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--mid);
-        }
-
-        .concept-body {
-            font-size: 0.92rem;
-            line-height: 1.9;
-            color: var(--mid);
-        }
-        .concept-body p + p { margin-top: 1.2rem; }
-
-        .connection-note {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            padding: 1.2rem 1.5rem;
-            border: 1px solid var(--border);
-            background: var(--off);
-        }
-
-        .connection-from, .connection-to {
-            font-size: 0.72rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--dark);
-            font-weight: 400;
-        }
-
-        .connection-arrow {
-            font-size: 0.8rem;
-            color: var(--green);
-            flex-shrink: 0;
-        }
-
-        .gallery-section {
-            padding: 80px 10%;
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Portrait image + specs side by side */
-        .gallery-first-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin: 2rem 0 3rem;
-            align-items: start;
-        }
-
-        .gallery-first-row .g-item {
-            aspect-ratio: 3/4;
-            overflow: hidden;
-        }
-
-        .gallery-first-row .g-item img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            filter: grayscale(5%);
-        }
-        .gallery-first-row .g-item:hover img {
-            transform: scale(1.04);
-            filter: grayscale(0%);
-        }
-
-        .specs-column {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 6rem;
-        }
-
-        .specs-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 2vw, 2rem);
-            font-weight: 300;
-            color: var(--dark);
-            line-height: 1.15;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-        }
-        .specs-heading em { font-style: italic; color: var(--green); }
-
-        .tech-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-        }
-
-        .spec-item {
-            padding: 1.2rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .spec-item:nth-last-child(-n+2) { border-bottom: none; }
-
-        .spec-label {
-            font-size: 0.52rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 0.4rem;
-        }
-
-        .spec-value {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: var(--dark);
-            line-height: 1.3;
-        }
-        .spec-value em { font-style: italic; color: var(--green); }
-
-        .gallery-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 5rem;
-            margin-bottom: 5rem;
-        }
-        .gallery-row .g-item { aspect-ratio: 4/5; overflow: hidden; }
-
-        .gallery-wide .g-item { aspect-ratio: 16/9; overflow: hidden; }
-
-        .g-item img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            filter: grayscale(5%);
-        }
-        .g-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
-
-        .g-placeholder {
-            width: 100%; height: 100%;
-            min-height: 200px;
-            background: var(--off);
-            border: 1px dashed var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-        }
-
-        .mockup-section {
-            padding: 80px 10%;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .mockup-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-
-        .mockup-item {
-            aspect-ratio: 3/4;
-            overflow: hidden;
-            background: var(--off);
-            border: 1px dashed var(--border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-        }
-
-        .mockup-item img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .mockup-item:hover img { transform: scale(1.04); }
-
-        .mockup-placeholder-icon { font-size: 1.4rem; opacity: 0.3; }
-
-        .mockup-placeholder-text {
-            font-size: 0.58rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-            text-align: center;
-            padding: 0 1rem;
-        }
-
-        .process-link-section {
-            padding: 60px 10%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-            background: var(--off);
-        }
-
-        .process-label {
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 0.5rem;
-        }
-
-        .process-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 300;
-            color: var(--dark);
-        }
-
-        .process-btn {
-            display: inline-block;
-            padding: 0.9rem 2.2rem;
-            border: 1px solid var(--green);
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--green);
-            text-decoration: none;
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-        .process-btn:hover { background: var(--green); color: var(--white); }
-
-        .credits-section {
-            padding: 60px 10%;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .credits-grid {
-            display: flex;
-            gap: 4rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .credit-role {
-            font-size: 0.58rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 0.3rem;
-        }
-
-        .credit-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: var(--dark);
-        }
-
-        .project-pagination {
-            padding: 60px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border);
-        }
-
-        .back-to-work {
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 3px;
-            transition: 0.3s;
-        }
-        .back-to-work:hover { color: var(--dark); border-color: var(--dark); }
-
-        .next-project-link {
-            text-align: right;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .next-project-link span {
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-            display: block;
-            margin-bottom: 0.4rem;
-        }
-        .next-project-link h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 300;
-            color: var(--dark);
-        }
-        .next-project-link:hover h3 { color: var(--green); }
-
-        .reveal {
-            opacity: 0; transform: translateY(24px);
-            transition: opacity 0.9s ease, transform 0.9s ease;
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes subtleZoom { to { transform: scale(1); } }
-
-        @media (max-width: 900px) {
-            .project-hero { height: auto; min-height: unset; }
-            .hero-img { position: relative; height: 100vw; }
-            .hero-content { position: relative; background: var(--white); padding: 2rem 5%; }
-            .hero-eyebrow { color: #0d5b06; }
-            .hero-title { color: #a71515; }
-            .hero-brief { color: #555; border-left-color: var(--yellow); }
-            .hero-meta-item { color: #888; }
-            .hero-right { align-items: flex-start; }
-            .concept-section { grid-template-columns: 1fr; gap: 3rem; padding: 60px 5%; }
-            .concept-sample { width: 55%; }
-            .gallery-section, .credits-section,
-            .process-link-section, .mockup-section { padding: 60px 5%; }
-            .gallery-first-row { grid-template-columns: 1fr; gap: 2rem; }
-            .gallery-first-row .g-item { aspect-ratio: 3/4; }
-            .tech-specs { grid-template-columns: 1fr 1fr; }
-            .gallery-row { grid-template-columns: 1fr 1fr; }
-            .gallery-wide .g-item { aspect-ratio: 4/3; }
-            .mockup-grid { grid-template-columns: 1fr 1fr; }
-            .credits-grid { gap: 2rem; }
-            .process-link-section { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
-            .project-pagination { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 40px 5%; }
-        }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="adv-weaving.css">
 </head>
 <body>
 
+    <!-- ── NAV ── -->
     <nav>
         <div class="logo"><a href="index.html">Ima P S</a></div>
         <div class="nav-links">
@@ -508,6 +25,10 @@
         </div>
     </nav>
 
+
+    <!-- ══════════════════════════════════════════
+         1. HERO
+    ══════════════════════════════════════════ -->
     <div class="project-hero">
         <img class="hero-img"
              src="images/advance weaving 0.jpg"
@@ -527,24 +48,35 @@
                 </p>
             </div>
             <div class="hero-right">
-                <span class="hero-meta-item">End & End Warp</span>
+                <span class="hero-meta-item">End &amp; End Warp</span>
                 <span class="hero-meta-item">Warp Rib</span>
                 <span class="hero-meta-item">Textile Art</span>
             </div>
         </div>
     </div>
 
+
+    <!-- ── COLOUR STRIP ── -->
     <div class="colour-strip"></div>
 
+
+    <!-- ══════════════════════════════════════════
+         2. CONCEPT SECTION
+    ══════════════════════════════════════════ -->
     <div class="concept-section reveal">
+
+        <!-- Left — source sample -->
         <div>
             <span class="section-eyebrow">The Starting Point</span>
             <div class="concept-sample">
-                <img src="images/Fabric construction 1.jpg" alt="Fabric Construction sample"
+                <img src="images/Fabric construction 1.jpg"
+                     alt="Fabric Construction sample"
                      onerror="this.style.display='none';">
             </div>
             <p class="concept-sample-caption">From Fabric Construction · Aglaonema Lipstick</p>
         </div>
+
+        <!-- Right — text -->
         <div>
             <h2 class="section-title">From sample<br>to <em>textile art</em></h2>
             <div class="connection-note">
@@ -566,15 +98,21 @@
                 </p>
             </div>
         </div>
+
     </div>
 
+
+    <!-- ══════════════════════════════════════════
+         3. GALLERY
+    ══════════════════════════════════════════ -->
     <div class="gallery-section reveal">
         <span class="section-eyebrow">The Work</span>
 
-        <!-- Portrait image LEFT + specs RIGHT -->
+        <!-- Portrait image + specs side by side -->
         <div class="gallery-first-row">
             <div class="g-item">
-                <img src="images/advance weaving 1.jpg" alt="Advanced Weaving"
+                <img src="images/advance weaving 1.jpg"
+                     alt="Advanced Weaving"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">adv weaving 1</div>
             </div>
@@ -591,7 +129,7 @@
                     </div>
                     <div class="spec-item">
                         <div class="spec-label">Warp Structure</div>
-                        <div class="spec-value">End & End Warp</div>
+                        <div class="spec-value">End &amp; End Warp</div>
                     </div>
                     <div class="spec-item">
                         <div class="spec-label">Weave</div>
@@ -599,19 +137,19 @@
                     </div>
                     <div class="spec-item">
                         <div class="spec-label">Yarn Count</div>
-                        <div class="spec-value">— <span style="font-size:0.72rem;color:var(--mid);">add here</span></div>
+                        <div class="spec-value">— <span class="spec-placeholder">add here</span></div>
                     </div>
                     <div class="spec-item">
                         <div class="spec-label">Warp Yarn</div>
-                        <div class="spec-value">— <span style="font-size:0.72rem;color:var(--mid);">add here</span></div>
+                        <div class="spec-value">— <span class="spec-placeholder">add here</span></div>
                     </div>
                     <div class="spec-item">
                         <div class="spec-label">Weft Yarn</div>
-                        <div class="spec-value">— <span style="font-size:0.72rem;color:var(--mid);">add here</span></div>
+                        <div class="spec-value">— <span class="spec-placeholder">add here</span></div>
                     </div>
                     <div class="spec-item">
                         <div class="spec-label">Sett (EPI)</div>
-                        <div class="spec-value">— <span style="font-size:0.72rem;color:var(--mid);">add here</span></div>
+                        <div class="spec-value">— <span class="spec-placeholder">add here</span></div>
                     </div>
                 </div>
             </div>
@@ -620,52 +158,65 @@
         <!-- Three photos -->
         <div class="gallery-row reveal">
             <div class="g-item">
-                <img src="images/advance weaving 2.jpg" alt="Advanced Weaving"
+                <img src="images/advance weaving 2.jpg"
+                     alt="Advanced Weaving"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">adv weaving 2</div>
             </div>
             <div class="g-item">
-                <img src="images/advance weaving 3.jpg" alt="Advanced Weaving"
+                <img src="images/advance weaving 3.jpg"
+                     alt="Advanced Weaving"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">adv weaving 3</div>
             </div>
             <div class="g-item">
-                <img src="images/adv weaving 4.jpg" alt="Advanced Weaving"
+                <img src="images/adv weaving 4.jpg"
+                     alt="Advanced Weaving"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">adv weaving 4</div>
             </div>
         </div>
 
-       <!-- Wide panorama -->
+        <!-- Wide panorama -->
         <div class="gallery-wide reveal" style="margin-bottom: 1rem;">
             <div class="g-item">
-                <img src="images/adv weaving 5.jpg" alt="Advanced Weaving"
+                <img src="images/adv weaving 5.jpg"
+                     alt="Advanced Weaving"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">adv weaving 5</div>
             </div>
         </div>
-        <!-- Three landscape / coordinate frames - column layout -->
-           <div class="reveal" style="display: flex; flex-direction: column; gap: 3rem; margin-bottom: 0; max-width: 60%; margin-left: auto; margin-right: auto;">
-            <div class="g-item" style="aspect-ratio: 10/3;">
-                <img src="images/adv weaving co1.jpg" alt="Co-ordinate 1"
+
+        <!-- Co-ordinate strips -->
+        <div class="coord-strips reveal">
+            <div class="g-item">
+                <img src="images/adv weaving co1.jpg"
+                     alt="Co-ordinate 1"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">co-ordinate 1</div>
             </div>
-            <div class="g-item" style="aspect-ratio: 10/3;">
-                <img src="images/adv weaving co2.jpg" alt="Co-ordinate 2"
+            <div class="g-item">
+                <img src="images/adv weaving co2.jpg"
+                     alt="Co-ordinate 2"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">co-ordinate 2</div>
             </div>
-            <div class="g-item" style="aspect-ratio: 10/3;">
-                <img src="images/adv weaving co3.jpg" alt="Co-ordinate 3"
+            <div class="g-item">
+                <img src="images/adv weaving co3.jpg"
+                     alt="Co-ordinate 3"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="g-placeholder" style="display:none;">co-ordinate 3</div>
             </div>
         </div>
+
     </div>
 
-    <!-- MOCKUPS -->
-   <!-- <div class="mockup-section reveal">
+
+    <!-- ══════════════════════════════════════════
+         4. MOCKUPS (uncomment to enable)
+    ══════════════════════════════════════════ -->
+    <!--
+    <div class="mockup-section reveal">
         <span class="section-eyebrow">In Context</span>
         <h2 class="section-title">Textile<br><em>Mockups</em></h2>
         <div class="mockup-grid">
@@ -689,15 +240,26 @@
             </div>
         </div>
     </div>
+    -->
 
+
+    <!-- ══════════════════════════════════════════
+         5. PROCESS LINK (uncomment to enable)
+    ══════════════════════════════════════════ -->
+    <!--
     <div class="process-link-section reveal">
         <div>
             <p class="process-label">Behind the work</p>
             <p class="process-title">View the Process →</p>
         </div>
         <a href="adv-weaving-process.html" class="process-btn">Explore Process</a>
-    </div>-->
+    </div>
+    -->
 
+
+    <!-- ══════════════════════════════════════════
+         6. CREDITS
+    ══════════════════════════════════════════ -->
     <div class="credits-section reveal">
         <span class="section-eyebrow">Credits</span>
         <div class="credits-grid">
@@ -712,6 +274,10 @@
         </div>
     </div>
 
+
+    <!-- ══════════════════════════════════════════
+         PAGINATION / NEXT PROJECT
+    ══════════════════════════════════════════ -->
     <div class="project-pagination">
         <a href="work.html" class="back-to-work">← All Work</a>
         <a href="basic-weaving.html" class="next-project-link">
@@ -720,10 +286,14 @@
         </a>
     </div>
 
+
+    <!-- ── SCROLL REVEAL SCRIPT ── -->
     <script>
         document.querySelectorAll('.reveal').forEach(el => {
             new IntersectionObserver((entries) => {
-                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
             }, { threshold: 0.08 }).observe(el);
         });
     </script>

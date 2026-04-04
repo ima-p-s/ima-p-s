@@ -1,0 +1,524 @@
+/* ============================================================
+   fabric.css — Fabric Construction Project Page
+   Ima P S · NID AP · 2025
+   ============================================================ */
+
+/* ── VARIABLES ── */
+:root {
+    --green-bright: #6aA318;
+    --green-mid:    #3E6B23;
+    --red:          #D0002E;
+    --blush:        #F5A898;
+    --blush-light:  #F5D0C5;
+    --blush-pale:   #FFF5F0;
+}
+
+
+/* ══════════════════════════════════════════
+   1. HERO
+══════════════════════════════════════════ */
+.project-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #111;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.05);
+    animation: subtleZoom 8s ease forwards;
+}
+
+.hero-placeholder {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    color: #444;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: #111;
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 4rem 5%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.hero-text {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s ease 0.5s forwards;
+}
+
+.hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #024b13;
+    margin-bottom: 1rem;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    color: #599506;
+    letter-spacing: -0.02em;
+}
+
+.hero-title em {
+    font-style: italic;
+    color: #ca0c0c;
+    display: block;
+}
+
+.hero-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+}
+
+.hero-meta-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(79, 9, 36, 0.5);
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(90, 179, 32, 0.4);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.2s forwards;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: rgba(90, 179, 32, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(230, 0, 0, 0.6);
+    animation: scrollDrop 1.8s ease-in-out 1.5s infinite;
+}
+
+
+/* ══════════════════════════════════════════
+   2. COLOUR STRIP
+══════════════════════════════════════════ */
+.palette-strip {
+    display: flex;
+    height: 5px;
+    margin: 80px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.palette-strip span {
+    flex: 1;
+}
+
+
+/* ══════════════════════════════════════════
+   3. SHARED SECTION STYLES
+══════════════════════════════════════════ */
+.project-section {
+    padding: 100px 10%;
+    border-bottom: 1px solid #eee;
+}
+
+.project-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent, #999999);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.section-label.red   { color: var(--red); }
+.section-label.green { color: var(--green-mid); }
+
+.project-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #111111;
+    margin-bottom: 40px;
+}
+
+.project-section h2 em        { font-style: italic; color: var(--red); }
+.project-section h2 em.green  { color: var(--green-mid); }
+
+.project-section p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    font-weight: 300;
+    max-width: 680px;
+}
+
+
+/* ══════════════════════════════════════════
+   4. BRIEF SECTION
+══════════════════════════════════════════ */
+.brief-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.brief-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #111;
+    border-left: 2px solid var(--red);
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+
+/* ══════════════════════════════════════════
+   5. INSPIRATION SECTION
+══════════════════════════════════════════ */
+.inspiration-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.plant-photo img {
+    width: 100%;
+    display: block;
+}
+
+.plant-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-top: 12px;
+}
+
+.swatches-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 20px;
+    margin-left: 140px;
+    margin-top: 90px;
+    display: block;
+}
+
+.swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 12px;
+    margin-top: 15px;
+    margin-left: 100px;
+    max-width: 300px;
+}
+
+.swatch-grid div {
+    aspect-ratio: 1 / 1;
+    width: 90%;
+}
+
+
+/* ══════════════════════════════════════════
+   6. MAIN SAMPLES SECTION
+══════════════════════════════════════════ */
+.samples-bg {
+    background: #f8f8f8;
+}
+
+.samples-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.sample-card {
+    overflow: hidden;
+}
+
+.sample-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(5%);
+    transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sample-card.hero-sample .sample-img {
+    aspect-ratio: 4 / 3;
+}
+
+.sample-card:hover .sample-img {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+.sample-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #ececec;
+    border: 1px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.sample-card.hero-sample .sample-placeholder {
+    aspect-ratio: 2 / 3;
+}
+
+.sample-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-top: 15px;
+}
+
+.sample-technique {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: #999;
+    margin-top: 5px;
+}
+
+
+/* ══════════════════════════════════════════
+   7. COORDINATE SAMPLES SECTION
+══════════════════════════════════════════ */
+.coord-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 50px;
+}
+
+.coord-grid {
+    columns: 4;
+    column-gap: 20px;
+}
+
+.coord-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.coord-item img {
+    width: 100%;
+    display: block;
+    filter: grayscale(5%);
+    transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.coord-item:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.04);
+}
+
+.coord-placeholder {
+    width: 100%;
+    background: var(--blush-pale);
+    border: 1px dashed var(--blush-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blush);
+}
+
+/* Coordinate placeholder aspect ratios */
+.coord-item:nth-child(1)  .coord-placeholder { aspect-ratio: 3/4; }
+.coord-item:nth-child(2)  .coord-placeholder { aspect-ratio: 1/1; }
+.coord-item:nth-child(3)  .coord-placeholder { aspect-ratio: 4/5; }
+.coord-item:nth-child(4)  .coord-placeholder { aspect-ratio: 3/4; }
+.coord-item:nth-child(5)  .coord-placeholder { aspect-ratio: 2/3; }
+.coord-item:nth-child(6)  .coord-placeholder { aspect-ratio: 1/1; }
+.coord-item:nth-child(7)  .coord-placeholder { aspect-ratio: 4/3; }
+.coord-item:nth-child(8)  .coord-placeholder { aspect-ratio: 3/4; }
+.coord-item:nth-child(9)  .coord-placeholder { aspect-ratio: 1/1; }
+.coord-item:nth-child(10) .coord-placeholder { aspect-ratio: 2/3; }
+
+
+/* ══════════════════════════════════════════
+   8. PAGINATION / NEXT PROJECT
+══════════════════════════════════════════ */
+.project-pagination {
+    border-top: 1px solid #eee;
+    padding: 60px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.next-project-link {
+    text-align: right;
+    transition: 0.3s;
+}
+
+.next-project-link span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+}
+
+.next-project-link h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-top: 10px;
+    font-weight: 400;
+}
+
+.next-project-link:hover {
+    color: #999;
+}
+
+.back-to-work {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 3px;
+    transition: 0.3s;
+}
+
+.back-to-work:hover {
+    color: #111;
+    border-color: #111;
+}
+
+
+/* ══════════════════════════════════════════
+   9. SCROLL REVEAL UTILITY
+══════════════════════════════════════════ */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.visible       { opacity: 1; transform: translateY(0); }
+.reveal-delay-1       { transition-delay: 0.1s; }
+.reveal-delay-2       { transition-delay: 0.2s; }
+.reveal-delay-3       { transition-delay: 0.3s; }
+
+
+/* ══════════════════════════════════════════
+   10. KEYFRAME ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes subtleZoom {
+    to { transform: scale(1); }
+}
+
+@keyframes scrollDrop {
+    0%        { top: -100%; }
+    50%, 100% { top: 100%; }
+}
+
+
+/* ══════════════════════════════════════════
+   11. RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 900px) {
+    .project-section    { padding: 60px 5%; }
+    .brief-grid         { grid-template-columns: 1fr; gap: 30px; }
+    .inspiration-grid   { grid-template-columns: 1fr; gap: 40px; }
+    .samples-grid       { grid-template-columns: 1fr; }
+    .coord-grid         { columns: 2; }
+    .coord-intro        { grid-template-columns: 1fr; gap: 20px; }
+    .project-pagination { flex-direction: column; align-items: flex-start; gap: 30px; padding: 40px 5%; }
+    .hero-content       { padding: 1.5rem 5%; flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .hero-meta          { align-items: flex-start; }
+    .project-hero       { height: 60vw; }
+    .hero-title         { font-size: clamp(2rem, 8vw, 3.5rem); }
+    .swatches-label     { margin-left: 0; margin-top: 30px; }
+    .swatch-grid        { margin-left: 0; max-width: 100%; }
+}
