@@ -28,6 +28,7 @@ body {
 
 /* Section background defaults */
 .concept-section,
+.panel-frames-wrapper,
 .gallery-section,
 .samples-section,
 .credits-section,
@@ -166,6 +167,13 @@ body {
     align-items: start;
 }
 
+.concept-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .concept-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 2.5vw, 2.5rem);
@@ -174,6 +182,7 @@ body {
     letter-spacing: -0.02em;
     color: var(--dark);
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .concept-title em {
@@ -181,11 +190,24 @@ body {
     color: var(--red);
 }
 
-/* Panel frames — 3×2 grid */
+/* Panel frames — 6×1 grid */
+/* Panel frames wrapper — full width, centred */
+.panel-frames-wrapper {
+    padding: 40px 10% 60px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+}
+
 .panel-frames {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 0.6rem;
+    width: 80%;
+}
+
+.panel-frame {
+    min-width: 0;
 }
 
 .panel-frame-img {
