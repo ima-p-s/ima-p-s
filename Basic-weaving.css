@@ -78,13 +78,13 @@ img { display: block; }
     font-size: clamp(3.5rem, 8vw, 9rem);
     font-weight: 300;
     line-height: 0.95;
-    color: #000000;
+    color: #d4d4d4;
     letter-spacing: -0.03em;
 }
 
 .hero-title em {
     font-style: italic;
-    color: rgb(130, 6, 6);
+    color: rgb(228, 0, 0);
     display: block;
 }
 
@@ -92,9 +92,9 @@ img { display: block; }
     margin-top: 1.5rem;
     font-size: 0.85rem;
     line-height: 1.8;
-    color: rgba(245, 245, 245, 0.713);
+    color: rgba(203, 198, 198, 0.713);
     max-width: 480px;
-    border-left: 1px solid rgba(169, 150, 150, 0.716);
+    border-left: 1px solid rgba(144, 128, 128, 0.716);
     padding-left: 1.2rem;
 }
 
